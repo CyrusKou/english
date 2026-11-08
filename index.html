@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic English & Wild Cities Learning Portal</title>
+    <title>Academic English & Wild Cities Practice Portal</title>
     <style>
         :root {
             --primary: #1e3a8a;
@@ -117,16 +117,6 @@
             margin-bottom: 20px;
             font-size: 0.95rem;
             border-radius: 0 4px 4px 0;
-        }
-
-        .passage-card {
-            background-color: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.7;
         }
 
         .word-bank {
@@ -258,8 +248,8 @@
         .flashcard-wrap {
             perspective: 1000px;
             width: 100%;
-            max-width: 520px;
-            height: 280px;
+            max-width: 540px;
+            height: 300px;
             margin: 20px auto;
             cursor: pointer;
         }
@@ -305,15 +295,15 @@
 <body>
 
 <div class="header-bar">
-    <h1>Academic English & Wild Cities Interactive Learning Portal</h1>
-    <p>Comprehensive Online Assessment, Flashcards & Practice Modules</p>
+    <h1>Academic English & Wild Cities Learning Portal</h1>
+    <p>130 Vocabulary Flashcards, Exercises A–G, Passage Reading Quiz & Grammar</p>
 </div>
 
 <div class="main-container">
 
     <!-- Navigation Tabs -->
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('flashcard-section')">1. Full Vocabulary Flashcards</button>
+        <button class="tab-btn active" onclick="switchTab('flashcard-section')">1. 130 Vocab Flashcards</button>
         <button class="tab-btn" onclick="switchTab('cloze-section')">2. Fill-in-the-Blanks (Ex A–G)</button>
         <button class="tab-btn" onclick="switchTab('reading-section')">3. Wild Cities Passage Quiz</button>
         <button class="tab-btn" onclick="switchTab('part1')">4. Prepositions (Act 1–3)</button>
@@ -321,10 +311,10 @@
         <button class="tab-btn" onclick="switchTab('part4')">6. Editing & Rewriting</button>
     </div>
 
-    <!-- 1. FLASHCARD SECTION -->
+    <!-- 1. 130 VOCABULARY FLASHCARDS SECTION -->
     <div id="flashcard-section" class="section-panel active">
-        <h2 class="section-title">Pathways 4 Unit 2 Vocabulary Flashcards Deck</h2>
-        <p style="text-align: center; color: var(--text-muted);">Click the card to flip and display the Chinese meaning and sentence context.</p>
+        <h2 class="section-title">Complete 130 Vocabulary Terms Flashcard Deck</h2>
+        <p style="text-align: center; color: var(--text-muted);">Click on the card to flip and reveal the Chinese meaning and section index. Use search or jump directly to any term number.</p>
 
         <div class="flashcard-wrap" onclick="toggleFlip()">
             <div id="fc-card" class="flashcard-inner">
@@ -335,15 +325,17 @@
                 </div>
                 <div class="flashcard-back">
                     <h3 id="fc-meaning" style="font-size: 1.8rem; margin: 0 0 10px 0;">乍看之下</h3>
-                    <p id="fc-context" style="font-size: 0.95rem; opacity: 0.9;">[Para A] At first glance, it's a scene that plays out daily...</p>
+                    <p id="fc-context" style="font-size: 0.95rem; opacity: 0.9;">[Unit 2 Wild Cities: Item #1]</p>
                 </div>
             </div>
         </div>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
+        <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
             <button class="btn-submit" onclick="moveCard(-1)">Previous</button>
-            <input type="text" id="fc-search-input" placeholder="Search word..." style="max-width: 180px; text-align: center;" onkeyup="searchCard()">
+            <input type="text" id="fc-search-input" placeholder="Search word..." style="max-width: 160px; text-align: center;" onkeyup="searchCard()">
             <button class="btn-submit" onclick="moveCard(1)">Next</button>
+            <span style="font-size: 0.9rem; color: var(--text-muted); margin-left: 10px;">Jump to #: </span>
+            <input type="number" id="fc-jump-num" min="1" max="130" style="width: 60px; padding: 6px; border: 1px solid var(--border); border-radius: 4px;" onchange="jumpToCard()">
         </div>
     </div>
 
@@ -415,6 +407,27 @@
             <div class="feedback-box"></div>
         </div>
 
+        <!-- Exercise D -->
+        <div class="instruction-box" style="margin-top: 30px;">
+            <strong>Exercise D – Vocabulary Practice:</strong>
+            <div class="word-bank" style="margin-top: 8px; margin-bottom: 0;">
+                Column A: survival, stride, anecdotal, engage, completely, captive<br>
+                Column B: across, stride, with, evidence, strategy, eradicated, animals
+            </div>
+        </div>
+        <div class="exercise-item" id="cloze-exD">
+            <span class="question-label">As cities expand, wild animals face many challenges. Some animals develop a clever (1) ____________ to survive in urban environments. For example, they may carefully (2) ____________ roads when traffic is light. Although some people believe that wild animals should be (3) ____________ from cities, others think humans should learn to (4) ____________ them peacefully. However, stories from local residents are only (5) ____________ and may not prove everything.</span>
+            <div class="input-group">
+                <input type="text" class="short-input" id="exD-1" placeholder="1">
+                <input type="text" class="short-input" id="exD-2" placeholder="2">
+                <input type="text" class="short-input" id="exD-3" placeholder="3">
+                <input type="text" class="short-input" id="exD-4" placeholder="4">
+                <input type="text" class="short-input" id="exD-5" placeholder="5">
+            </div>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exD', ['survival strategy', 'stride across', 'completely eradicated', 'engage with', 'anecdotal evidence'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
         <!-- Exercise E -->
         <div class="instruction-box" style="margin-top: 30px;">
             <strong>Exercise E – Word Form Selection:</strong><br>
@@ -450,9 +463,45 @@
             <button class="btn-submit" onclick="checkMultiText('cloze-exF', ['urbanize', 'underestimate', 'flexible', 'eradicate', 'coexist'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
+
+        <!-- Exercise G (1) -->
+        <div class="instruction-box" style="margin-top: 30px;">
+            <strong>Exercise G (First Box) – Fill in the Blanks:</strong><br>
+            A. encounter | B. rapid | C. constraint | D. minimize | E. delightful | F. synonymous
+        </div>
+        <div class="exercise-item" id="cloze-exG1">
+            <span class="question-label">As the world experiences (1) ____________ urbanization, human interaction with urban wildlife has become unavoidable. Major cities like Chicago are now almost (2) ____________ with animals like coyotes and raccoons. While city officials work hard to (3) ____________ dangerous conflicts between residents and pets, many ecologists emphasize that not all interactions are negative. In fact, many people find unexpected (4) ____________ with nature in their backyards to be (5) ____________ and memorable experiences.</span>
+            <div class="input-group">
+                <input type="text" class="short-input" id="exG1-1" placeholder="1">
+                <input type="text" class="short-input" id="exG1-2" placeholder="2">
+                <input type="text" class="short-input" id="exG1-3" placeholder="3">
+                <input type="text" class="short-input" id="exG1-4" placeholder="4">
+                <input type="text" class="short-input" id="exG1-5" placeholder="5">
+            </div>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exG1', ['rapid', 'synonymous', 'minimize', 'encounters', 'delightful'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <!-- Exercise G (2) -->
+        <div class="instruction-box" style="margin-top: 30px;">
+            <strong>Exercise G (Second Box) – Fill in the Blanks:</strong><br>
+            A. abundant | B. restrict | C. investigate | D. distinctive | E. adapt | F. conflict
+        </div>
+        <div class="exercise-item" id="cloze-exG2">
+            <span class="question-label">Wild animals living in cities often face challenges that their rural relatives rarely experience. Although food may be (1) ____________ in urban areas because of human activities, animals must still learn how to avoid traffic and interact with people. Researchers continue to (2) ____________ how these environmental changes influence animal behavior. Some species have developed (3) ____________ survival strategies, making them especially successful in urban environments. However, as wildlife populations grow, interactions between humans and animals may become more frequent, sometimes resulting in serious (4) ____________. To survive, many animals must (5) ____________ their behavior to meet the demands of city life.</span>
+            <div class="input-group">
+                <input type="text" class="short-input" id="exG2-1" placeholder="1">
+                <input type="text" class="short-input" id="exG2-2" placeholder="2">
+                <input type="text" class="short-input" id="exG2-3" placeholder="3">
+                <input type="text" class="short-input" id="exG2-4" placeholder="4">
+                <input type="text" class="short-input" id="exG2-5" placeholder="5">
+            </div>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exG2', ['abundant', 'investigate', 'distinctive', 'conflicts', 'adapt'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
     </div>
 
-    <!-- 3. READING PASSAGE COMPREHENSION QUIZ -->
+    <!-- 3. PASSAGE READING COMPREHENSION QUIZ -->
     <div id="reading-section" class="section-panel">
         <h2 class="section-title">Reading Passage Quiz: "Wild Cities"</h2>
 
@@ -650,45 +699,150 @@
         event.currentTarget.classList.add('active');
     }
 
-    // Flashcard Dataset built from images
+    // Complete 130 Vocabulary Data Set from Pathways 4 Unit 2 (Images 13–18)
     const flashcardsData = [
-        { word: "at first glance", meaning: "乍看之下", context: "[Para A] At first glance, it's a scene that plays out daily..." },
-        { word: "plays out", meaning: "上演、發生", context: "[Para A] ...a scene that plays out daily in cities across America." },
-        { word: "steps out of", meaning: "從…走出", context: "[Para A] ...steps out of his mail truck and strides across..." },
-        { word: "strides across", meaning: "大步走過", context: "[Para A] ...strides across the street, letters in hand." },
-        { word: "unremarkable", meaning: "平凡的、不值得注意的", context: "[Para A] That much is unremarkable." },
-        { word: "hefty", meaning: "體型壯碩的", context: "[Para A] ...a hefty American black bear, likely a young male..." },
-        { word: "vigorously", meaning: "猛烈地、用力地", context: "[Para A] ...sitting a few yards away, vigorously scratching..." },
-        { word: "shedding", meaning: "正在脫落的", context: "[Para A] ...scratching his shedding winter coat." },
-        { word: "white noise", meaning: "白噪音", context: "[Para B] ...apparently just white noise to the bear..." },
-        { word: "wanders", meaning: "漫步、徘徊", context: "[Para B] ...which eventually wanders down the sidewalk..." },
-        { word: "captivated", meaning: "深深吸引", context: "[Para C] ...a team of researchers was captivated by another discovery..." },
-        { word: "gnarled", meaning: "粗糙的、扭曲的", context: "[Para C] ...inside a gnarled silver maple tree." },
-        { word: "hibernated", meaning: "冬眠", context: "[Para C] ...hibernated there over the winter..." },
-        { word: "adaptable", meaning: "適應力強的", context: "[Para D] They're so much more adaptable than we give them credit for." },
-        { word: "embraced", meaning: "欣然接受", context: "[Para E] Some Asheville residents have embraced their furry neighbors..." },
-        { word: "advent", meaning: "興起、出現", context: "[Para F] The advent of the city bear in Asheville..." },
-        { word: "sprawling", meaning: "向外擴張的", context: "[Para F] ...sprawling cities and suburbs have swallowed up..." },
-        { word: "habitat", meaning: "棲息地", context: "[Para F] ...swallowed up large areas of bear habitat..." },
-        { word: "coexist", meaning: "共存", context: "[Para H] We understand everyone has to coexist." },
-        { word: "metropolis", meaning: "大都市", context: "[Para I] The metropolis most synonymous with the urban coyote is Chicago..." },
-        { word: "constraints", meaning: "限制", context: "[Para J] ...what we perceive to be constraints." },
-        { word: "eradicate", meaning: "根除、徹底消除", context: "[Para L] ...despite our best efforts to eradicate them." },
-        { word: "cognition", meaning: "認知能力", context: "[Para O] ...looking into raccoon behavior and cognition..." },
-        { word: "reversal learning", meaning: "反向學習", context: "[Para P] In an experiment called reversal learning..." },
-        { word: "exploiting", meaning: "利用", context: "[Para Q] ...successful by exploiting humans, not avoiding them." },
-        { word: "exploratory", meaning: "喜歡探索的", context: "[Para T] ...urban raccoons are more exploratory than their country cousins." }
+        { word: "1. glance", meaning: "看一眼" },
+        { word: "2. plays out", meaning: "上演、發生" },
+        { word: "3. steps out of", meaning: "從…走出" },
+        { word: "4. strides across", meaning: "大步走過" },
+        { word: "5. unremarkable", meaning: "平凡的" },
+        { word: "6. hefty", meaning: "體型壯碩的" },
+        { word: "7. yards", meaning: "碼 (1碼 = 91.4 cm)" },
+        { word: "8. vigorously", meaning: "猛烈地" },
+        { word: "9. scratching", meaning: "抓" },
+        { word: "10. shedding", meaning: "正在脫落的" },
+        { word: "11. interstate", meaning: "州際的" },
+        { word: "12. roars", meaning: "發出轟隆聲" },
+        { word: "13. apparently", meaning: "顯然地" },
+        { word: "14. white noise", meaning: "白噪音" },
+        { word: "15. wanders", meaning: "漫步" },
+        { word: "16. deeper into", meaning: "更深入" },
+        { word: "17. barely", meaning: "僅僅" },
+        { word: "18. captivated", meaning: "深深吸引" },
+        { word: "19. hollow", meaning: "洞穴" },
+        { word: "20. gnarled", meaning: "粗糙的" },
+        { word: "21. track", meaning: "追蹤" },
+        { word: "22. hibernated", meaning: "冬眠" },
+        { word: "23. mere", meaning: "只不過的、僅僅的" },
+        { word: "24. shouts over", meaning: "大聲喊叫" },
+        { word: "25. scrambles", meaning: "迅速而吃力地爬行" },
+        { word: "26. den", meaning: "獸穴" },
+        { word: "27. adaptable", meaning: "適應力強的" },
+        { word: "28. give someone credit for", meaning: "肯定某人的…能力" },
+        { word: "29. indeed", meaning: "的確" },
+        { word: "30. take so well to", meaning: "順利地適應" },
+        { word: "31. nestled in", meaning: "坐落於" },
+        { word: "32. shuffle down", meaning: "拖著腳步慢走" },
+        { word: "33. residential", meaning: "住宅區" },
+        { word: "34. climb onto", meaning: "爬上" },
+        { word: "35. front porches", meaning: "前門廊" },
+        { word: "36. embrace", meaning: "欣然接受" },
+        { word: "37. encounter", meaning: "遭遇" },
+        { word: "38. advent", meaning: "興起" },
+        { word: "39. stems from", meaning: "源自、起因於" },
+        { word: "40. tempting", meaning: "誘人的" },
+        { word: "41. available", meaning: "可取得的" },
+        { word: "42. sprawling", meaning: "向外擴張的（散亂延伸）" },
+        { word: "43. suburb", meaning: "郊區" },
+        { word: "44. swallowed up", meaning: "侵占" },
+        { word: "45. habitat", meaning: "棲息地" },
+        { word: "46. phenomenon", meaning: "現象" },
+        { word: "47. mammals", meaning: "哺乳動物" },
+        { word: "48. survival skills", meaning: "生存技能" },
+        { word: "49. harmony", meaning: "和諧" },
+        { word: "50. open-minded", meaning: "思想開明的" },
+        { word: "51. defend", meaning: "保護" },
+        { word: "52. coexist", meaning: "共存" },
+        { word: "53. reclaimed", meaning: "重新取得" },
+        { word: "54. coyotes", meaning: "郊狼" },
+        { word: "55. take... by storm", meaning: "席捲……" },
+        { word: "56. metropolis", meaning: "大都市" },
+        { word: "57. synonymous with", meaning: "令人聯想到…" },
+        { word: "58. ecologist", meaning: "生態學家" },
+        { word: "59. consistently", meaning: "持續地" },
+        { word: "60. underestimate", meaning: "低估" },
+        { word: "61. boundaries", meaning: "界限" },
+        { word: "62. perceive", meaning: "認為、理解" },
+        { word: "63. constraints", meaning: "限制" },
+        { word: "64. restricted", meaning: "受限於" },
+        { word: "65. eradicate", meaning: "根除、徹底消除" },
+        { word: "66. predator", meaning: "掠食者" },
+        { word: "67. strikes", meaning: "撞擊" },
+        { word: "68. stoplights", meaning: "紅綠燈" },
+        { word: "69. adaptability", meaning: "適應能力" },
+        { word: "70. variability", meaning: "多樣性" },
+        { word: "71. primary", meaning: "主要的" },
+        { word: "72. captive", meaning: "被圈養的" },
+        { word: "73. hypothesis", meaning: "假說" },
+        { word: "74. anecdotal", meaning: "傳聞的" },
+        { word: "75. theorize", meaning: "推論" },
+        { word: "76. processed", meaning: "加工的" },
+        { word: "77. cereal", meaning: "穀物食品" },
+        { word: "78. nutrition-dense", meaning: "富含營養的" },
+        { word: "79. connection", meaning: "關聯" },
+        { word: "80. reliance on", meaning: "依賴" },
+        { word: "81. conflict", meaning: "衝突" },
+        { word: "82. cognition", meaning: "認知能力" },
+        { word: "83. species", meaning: "物種" },
+        { word: "84. thoroughly", meaning: "徹底地" },
+        { word: "85. bushy-tailed", meaning: "蓬鬆尾巴的" },
+        { word: "86. omnivores", meaning: "雜食動物" },
+        { word: "87. jokingly", meaning: "開玩笑地" },
+        { word: "88. dub", meaning: "稱作" },
+        { word: "89. literature", meaning: "文獻" },
+        { word: "90. breaking out", meaning: "從…逃脫" },
+        { word: "91. confirm", meaning: "證實" },
+        { word: "92. crafty", meaning: "狡猾的" },
+        { word: "93. reputation", meaning: "名聲" },
+        { word: "94. reversal", meaning: "反向；倒轉" },
+        { word: "95. equipped with", meaning: "配備有" },
+        { word: "96. foot pedal", meaning: "腳踏板" },
+        { word: "97. figured out", meaning: "弄清楚" },
+        { word: "98. tweak", meaning: "稍微調整" },
+        { word: "99. perspective", meaning: "觀點" },
+        { word: "100. engaged with", meaning: "嘗試操作" },
+        { word: "101. survival", meaning: "生存" },
+        { word: "102. exploiting", meaning: "利用" },
+        { word: "103. bolder", meaning: "大膽的" },
+        { word: "104. rural areas", meaning: "鄉村地區" },
+        { word: "105. readiness", meaning: "準備程度" },
+        { word: "106. unfamiliar", meaning: "陌生的" },
+        { word: "107. bait", meaning: "誘餌" },
+        { word: "108. stakes", meaning: "木樁" },
+        { word: "109. install", meaning: "安裝" },
+        { word: "110. muggy", meaning: "悶熱潮濕的" },
+        { word: "111. strapped", meaning: "固定" },
+        { word: "112. feisty", meaning: "活力十足的" },
+        { word: "113. chasing off", meaning: "把…趕走" },
+        { word: "114. indicated", meaning: "顯示" },
+        { word: "115. exploratory", meaning: "喜歡探索的" },
+        { word: "116. territorial", meaning: "有領域性的" },
+        { word: "117. counterpart", meaning: "相對應的人或物（同類）" },
+        { word: "118. pest", meaning: "有害動物" },
+        { word: "119. unworthy of", meaning: "不值得" },
+        { word: "120. rapidly", meaning: "快速地" },
+        { word: "121. urbanizing", meaning: "都市化" },
+        { word: "122. unwise", meaning: "不明智的" },
+        { word: "123. urban landscapes", meaning: "都市環境" },
+        { word: "124. focuses on", meaning: "專注於" },
+        { word: "125. minimize", meaning: "儘量減少" },
+        { word: "126. conflicts", meaning: "衝突" },
+        { word: "127. encounters", meaning: "相遇" },
+        { word: "128. delightful", meaning: "令人愉快的" },
+        { word: "129. coexist with", meaning: "與…共存" },
+        { word: "130. celebrating", meaning: "珍惜並慶祝" }
     ];
 
     let currentCardIdx = 0;
 
     function renderFlashcard() {
         const item = flashcardsData[currentCardIdx];
-        document.getElementById('fc-counter').textContent = `Term ${currentCardIdx + 1} of ${flashcardsData.length}`;
+        document.getElementById('fc-counter').textContent = `Term ${currentCardIdx + 1} of 130`;
         document.getElementById('fc-word').textContent = item.word;
         document.getElementById('fc-meaning').textContent = item.meaning;
-        document.getElementById('fc-context').textContent = item.context;
+        document.getElementById('fc-context').textContent = `[Unit 2 Wild Cities: Item #${currentCardIdx + 1}]`;
         document.getElementById('fc-card').style.transform = 'rotateY(0deg)';
+        document.getElementById('fc-jump-num').value = currentCardIdx + 1;
     }
 
     function toggleFlip() {
@@ -715,7 +869,15 @@
         }
     }
 
-    // Evaluation Logic
+    function jumpToCard() {
+        const num = parseInt(document.getElementById('fc-jump-num').value);
+        if (num >= 1 && num <= 130) {
+            currentCardIdx = num - 1;
+            renderFlashcard();
+        }
+    }
+
+    // Validation Logic
     function checkMultiSelect(containerId, expectedList) {
         const container = document.getElementById(containerId);
         const selects = container.querySelectorAll('select');
@@ -730,7 +892,7 @@
 
         if (isCorrect) {
             feedback.className = 'feedback-box correct';
-            feedback.innerHTML = '<strong>Correct!</strong> All choices are accurate.';
+            feedback.innerHTML = '<strong>Correct!</strong> Choice is accurate.';
         } else {
             feedback.className = 'feedback-box incorrect';
             feedback.innerHTML = '<strong>Incorrect.</strong> Correct answer(s): <em>' + expectedList.join(', ') + '</em>.';
@@ -765,7 +927,7 @@
 
         if (!selected) {
             feedback.className = 'feedback-box incorrect';
-            feedback.innerHTML = 'Please choose an option first.';
+            feedback.innerHTML = 'Please select an option first.';
             return;
         }
 
@@ -774,7 +936,7 @@
             feedback.innerHTML = '<strong>Correct!</strong> Option ' + correctOption + ' is right.';
         } else {
             feedback.className = 'feedback-box incorrect';
-            feedback.innerHTML = '<strong>Incorrect.</strong> Correct option is <strong>' + correctOption + '</strong>.';
+            feedback.innerHTML = '<strong>Incorrect.</strong> The correct answer is option <strong>' + correctOption + '</strong>.';
         }
     }
 
@@ -802,4 +964,3 @@
 
 </body>
 </html>
-```eof
