@@ -3,708 +3,654 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pathways 4 Unit 2 _ Wild Cities Study Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Academic English & Wild Cities Learning Portal</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #0f172a;
+            --accent: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+            --success-text: #166534;
+            --error-bg: #fef2f2;
+            --error-border: #fecaca;
+            --error-text: #991b1b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header-bar {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-bar h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .header-bar p {
+            margin: 6px 0 0 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .main-container {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            background-color: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 10px 16px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #cbd5e1;
+            color: var(--text);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .section-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-panel.active {
+            display: block;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .instruction-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--accent);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .passage-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .word-bank {
+            background-color: #eff6ff;
+            border: 1px dashed var(--accent);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .exercise-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .question-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text);
+            display: block;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"].short-input {
+            max-width: 180px;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .radio-option:hover {
+            background-color: #f8fafc;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-top: 4px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent);
+        }
+
+        .feedback-box {
+            margin-top: 12px;
+            padding: 12px 16px;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background-color: var(--success-bg);
+            border: 1px solid var(--success-border);
+            color: var(--success-text);
+        }
+
+        .feedback-box.incorrect {
+            display: block;
+            background-color: var(--error-bg);
+            border: 1px solid var(--error-border);
+            color: var(--error-text);
+        }
+
+        /* Flashcard Component Styles */
+        .flashcard-wrap {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 520px;
+            height: 280px;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            padding: 24px;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+        }
+
+        .flashcard-front {
+            background: #ffffff;
+            color: var(--primary);
+        }
+
+        .flashcard-back {
+            background: var(--primary);
+            color: #ffffff;
+            transform: rotateY(180deg);
+            text-align: center;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
+<body>
 
-    <!-- Header -->
-    <header class="bg-indigo-950 text-white border-b-4 border-indigo-600 shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-6 text-center">
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Pathways 4: Unit 2 Wild Cities</h1>
-            <p class="text-indigo-200 text-sm md:text-base mt-1">Interactive Vocabulary Flashcards & Reading Comprehension Workbook</p>
-        </div>
-    </header>
+<div class="header-bar">
+    <h1>Academic English & Wild Cities Interactive Learning Portal</h1>
+    <p>Comprehensive Online Assessment, Flashcards & Practice Modules</p>
+</div>
 
-    <!-- Main Navigation Container -->
-    <div class="max-w-6xl mx-auto px-4 py-6">
-        <div class="flex flex-wrap gap-2 border-b border-slate-200 mb-6 pb-2">
-            <button onclick="switchTab('flashcards')" id="tab-flashcards" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-indigo-900 text-white shadow-sm">
-                1. Flashcards with Meanings
-            </button>
-            <button onclick="switchTab('matching')" id="tab-matching" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-slate-200 text-slate-700 hover:bg-slate-300">
-                2. Collocation Exercises (A–D)
-            </button>
-            <button onclick="switchTab('fillblanks')" id="tab-fillblanks" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-slate-200 text-slate-700 hover:bg-slate-300">
-                3. Fill-in-the-Blanks (E–G)
-            </button>
-            <button onclick="switchTab('passagequiz')" id="tab-passagequiz" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-slate-200 text-slate-700 hover:bg-slate-300">
-                4. Passage Comprehension Quiz
-            </button>
-        </div>
+<div class="main-container">
 
-        <!-- ================= TAB 1: FLASHCARDS ================= -->
-        <section id="sec-flashcards" class="tab-content block">
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-900">Unit Vocabulary Flashcards</h2>
-                        <p class="text-sm text-slate-500">Click card to flip and reveal English explanation, Chinese meaning, and passage context.</p>
-                    </div>
-                    <div class="flex items-center gap-3 w-full md:w-auto">
-                        <input type="text" id="card-search" oninput="filterCards()" placeholder="Search word..." class="px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full md:w-48">
-                        <span id="card-counter" class="text-sm font-semibold text-indigo-950 bg-indigo-50 px-3 py-1.5 rounded-lg border border-indigo-100 whitespace-nowrap">1 / 130</span>
-                    </div>
-                </div>
-
-                <!-- Flashcard -->
-                <div class="perspective-1000 w-full max-w-lg mx-auto h-72 cursor-pointer my-4" onclick="flipCard()">
-                    <div id="flashcard-inner" class="w-full h-full transform-style-3d transition-transform duration-500 relative rounded-2xl shadow-md border border-slate-200">
-                        <!-- Front -->
-                        <div class="backface-hidden absolute inset-0 bg-white rounded-2xl p-6 flex flex-col justify-center items-center text-center border-2 border-indigo-100">
-                            <span id="card-para" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider mb-2">[Paragraph A]</span>
-                            <h3 id="card-word" class="text-3xl font-bold text-slate-900">at first glance</h3>
-                            <p class="text-xs text-slate-400 mt-4">Click anywhere to flip 🔄</p>
-                        </div>
-                        <!-- Back -->
-                        <div class="backface-hidden rotate-y-180 absolute inset-0 bg-indigo-900 text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center">
-                            <h4 id="card-meaning" class="text-2xl font-bold text-yellow-300 mb-2">乍看之下</h4>
-                            <p id="card-context" class="text-sm text-indigo-100 leading-relaxed italic bg-indigo-950/50 p-3 rounded-lg border border-indigo-800/50 max-w-md">"At first glance, it's a scene that plays out daily in cities across America."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Controls -->
-                <div class="flex justify-center items-center gap-4 mt-6">
-                    <button onclick="prevCard()" class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm rounded-lg border border-slate-300 transition-colors">Previous</button>
-                    <button onclick="randomCard()" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold text-sm rounded-lg border border-indigo-200 transition-colors">Shuffle 🔀</button>
-                    <button onclick="nextCard()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-lg transition-colors">Next</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 2: COLLOCATION EXERCISES (A-D) ================= -->
-        <section id="sec-matching" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2">Collocation Matching & Cloze Exercises</h2>
-                <p class="text-sm text-slate-500 mb-6">Match Column A with Column B to form valid collocations, then complete the sentences below.</p>
-
-                <!-- Exercise A -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-3">Exercise A – Vocabulary Collocations</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 mb-4 font-mono">
-                        <div>• coexist with</div>
-                        <div>• open-minded</div>
-                        <div>• swallow up</div>
-                        <div>• exploratory behavior</div>
-                        <div>• vehicle strikes</div>
-                        <div>• survival skills</div>
-                    </div>
-                    <div class="space-y-4 text-sm" id="exA-container">
-                        <div class="q-item">
-                            <p class="mb-1">1. As cities continue to grow, they often (1) <input type="text" data-ans="swallow up" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> nearby forests, forcing wild animals to live closer to humans.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">2. Some animals develop excellent (2) <input type="text" data-ans="survival skills" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> to adapt to urban environments.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">3. Their (3) <input type="text" data-ans="exploratory behavior" class="border rounded px-2 py-1 w-44 font-semibold text-indigo-900"> allows them to search for food in unfamiliar places.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">4. However, they may face dangers such as (4) <input type="text" data-ans="vehicle strikes" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> when crossing busy roads.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">5. To reduce conflicts, people should remain (5) <input type="text" data-ans="open-minded" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> and learn how to (6) <input type="text" data-ans="coexist with" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> wildlife in their neighborhoods.</p>
-                        </div>
-                    </div>
-                    <button onclick="checkSection('exA-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise A Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise B -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-3">Exercise B – Vocabulary Collocations</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 mb-4 font-mono">
-                        <div>• scientific literature</div>
-                        <div>• front porch</div>
-                        <div>• nutrition-dense</div>
-                        <div>• chase off</div>
-                        <div>• associated with</div>
-                        <div>• wander down</div>
-                    </div>
-                    <div class="space-y-4 text-sm" id="exB-container">
-                        <div class="q-item">
-                            <p class="mb-1">Wild animals are becoming more common in suburban areas. Some raccoons (1) <input type="text" data-ans="wander down" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> residential streets at night, searching for food.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">They may even visit someone's (2) <input type="text" data-ans="front porch" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> to look for leftovers.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">The health risks they face are often (3) <input type="text" data-ans="associated with" class="border rounded px-2 py-1 w-36 font-semibold text-indigo-900"> food found in garbage bins.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">Although some people try to (4) <input type="text" data-ans="chase off" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> these animals, others enjoy watching them.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">According to (5) <input type="text" data-ans="scientific literature" class="border rounded px-2 py-1 w-44 font-semibold text-indigo-900">, urban wildlife can adapt surprisingly well to human environments.</p>
-                        </div>
-                    </div>
-                    <button onclick="checkSection('exB-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise B Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise C -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-3">Exercise C – Vocabulary Collocations</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 mb-4 font-mono">
-                        <div>• figure out</div>
-                        <div>• rapidly urbanizing</div>
-                        <div>• minimize conflicts</div>
-                        <div>• white noise</div>
-                        <div>• crafty reputation</div>
-                        <div>• step out</div>
-                    </div>
-                    <div class="space-y-4 text-sm" id="exC-container">
-                        <div class="q-item">
-                            <p class="mb-1">In a (1) <input type="text" data-ans="rapidly urbanizing" class="border rounded px-2 py-1 w-40 font-semibold text-indigo-900"> city, wild animals must learn to adapt to human activities.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">Some animals can (2) <input type="text" data-ans="figure out" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> how to find food and avoid busy roads.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">The sound of traffic may become a kind of (3) <input type="text" data-ans="white noise" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> to them.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">However, people should also learn to be cautious when they (4) <input type="text" data-ans="step out" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> of their houses and respect wildlife.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">Building green spaces can help (5) <input type="text" data-ans="minimize conflicts" class="border rounded px-2 py-1 w-40 font-semibold text-indigo-900"> between humans and animals.</p>
-                        </div>
-                    </div>
-                    <button onclick="checkSection('exC-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise C Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise D -->
-                <div class="border border-slate-200 rounded-lg p-5 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-3">Exercise D – Vocabulary Collocations</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs bg-indigo-50/60 p-3 rounded-lg border border-indigo-100 mb-4 font-mono">
-                        <div>• survival strategy</div>
-                        <div>• anecdotal evidence</div>
-                        <div>• completely eradicated</div>
-                        <div>• stride across</div>
-                        <div>• engage with</div>
-                        <div>• captive animals</div>
-                    </div>
-                    <div class="space-y-4 text-sm" id="exD-container">
-                        <div class="q-item">
-                            <p class="mb-1">As cities expand, wild animals face many challenges. Some animals develop a clever (1) <input type="text" data-ans="survival strategy" class="border rounded px-2 py-1 w-40 font-semibold text-indigo-900"> to survive in urban environments.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">For example, they may carefully (2) <input type="text" data-ans="stride across" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> roads when traffic is light.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">Although some people believe that wild animals should be (3) <input type="text" data-ans="completely eradicated" class="border rounded px-2 py-1 w-44 font-semibold text-indigo-900"> from cities, others think humans should learn to (4) <input type="text" data-ans="engage with" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> them peacefully.</p>
-                        </div>
-                        <div class="q-item">
-                            <p class="mb-1">However, stories from local residents are only (5) <input type="text" data-ans="anecdotal evidence" class="border rounded px-2 py-1 w-40 font-semibold text-indigo-900"> and may not prove everything.</p>
-                        </div>
-                    </div>
-                    <button onclick="checkSection('exD-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise D Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 3: FILL IN THE BLANKS (E-G) ================= -->
-        <section id="sec-fillblanks" class="tab-content hidden space-y-6">
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2">Fill in the Blanks with Context Vocabulary</h2>
-                <p class="text-sm text-slate-500 mb-6">Change the word form wherever necessary (e.g., singular/plural, verb tenses, gerunds).</p>
-
-                <!-- Exercise E -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-2">Exercise E</h3>
-                    <div class="flex flex-wrap gap-2 text-xs bg-indigo-50 p-2.5 rounded border border-indigo-100 font-mono mb-4">
-                        <span class="font-semibold">Options:</span> A. investigate | B. territory | C. tempting | D. adapt | E. harmony | F. exploit
-                    </div>
-                    <div class="space-y-3 text-sm" id="exE-container">
-                        <p>As human cities continue to expand, wild animals are increasingly forced to live near people. To survive in these unfamiliar environments, animals must (1) <input type="text" data-ans="adapt" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> to new surroundings and learn different survival strategies.</p>
-                        <p>Food waste left outside homes and restaurants provides a (2) <input type="text" data-ans="tempting" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> source of food for many species.</p>
-                        <p>Clever animals, such as raccoons, have learned to (3) <input type="text" data-ans="exploit" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> human activities to their advantage.</p>
-                        <p>Unlike animals in rural areas, some city animals are less (4) <input type="text" data-ans="territorial" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> and more willing to share their living spaces.</p>
-                        <p>Scientists are now (5) <input type="text" data-ans="investigating" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> how urban environments influence animal behavior and what humans can do to reduce conflicts with wildlife.</p>
-                    </div>
-                    <button onclick="checkSection('exE-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise E Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise F -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-2">Exercise F</h3>
-                    <div class="flex flex-wrap gap-2 text-xs bg-indigo-50 p-2.5 rounded border border-indigo-100 font-mono mb-4">
-                        <span class="font-semibold">Options:</span> A. urbanize | B. eradicate | C. encounter | D. flexible | E. underestimate | F. coexist
-                    </div>
-                    <div class="space-y-3 text-sm" id="exF-container">
-                        <p>As more natural areas disappear, wildlife is increasingly moving into cities. This process is part of a larger trend in which human societies continue to (1) <input type="text" data-ans="urbanize" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> the environment.</p>
-                        <p>Although people sometimes view wild animals as dangerous pests, they often (2) <input type="text" data-ans="underestimate" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> their ability to survive in unfamiliar surroundings.</p>
-                        <p>Animals such as coyotes have developed (3) <input type="text" data-ans="flexible" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> eating habits, allowing them to find food in many different places.</p>
-                        <p>While some communities have attempted to (4) <input type="text" data-ans="eradicate" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> these animals, such efforts have rarely been completely successful.</p>
-                        <p>Instead, scientists believe that humans and wildlife must learn to (5) <input type="text" data-ans="coexist" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> peacefully in shared environments.</p>
-                    </div>
-                    <button onclick="checkSection('exF-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise F Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise G (Part 1) -->
-                <div class="border border-slate-200 rounded-lg p-5 mb-6 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-2">Exercise G – Part 1</h3>
-                    <div class="flex flex-wrap gap-2 text-xs bg-indigo-50 p-2.5 rounded border border-indigo-100 font-mono mb-4">
-                        <span class="font-semibold">Options:</span> A. encounter | B. rapid | C. constraint | D. minimize | E. delightful | F. synonymous
-                    </div>
-                    <div class="space-y-3 text-sm" id="exG1-container">
-                        <p>As the world experiences (1) <input type="text" data-ans="rapid" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> urbanization, human interaction with urban wildlife has become unavoidable.</p>
-                        <p>Major cities like Chicago are now almost (2) <input type="text" data-ans="synonymous" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> with animals like coyotes and raccoons.</p>
-                        <p>While city officials work hard to (3) <input type="text" data-ans="minimize" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> dangerous conflicts between residents and pets, many ecologists emphasize that not all interactions are negative.</p>
-                        <p>In fact, many people find unexpected (4) <input type="text" data-ans="encounters" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> with nature in their backyards to be (5) <input type="text" data-ans="delightful" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> and memorable experiences.</p>
-                    </div>
-                    <button onclick="checkSection('exG1-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise G (1) Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-
-                <!-- Exercise G (Part 2) -->
-                <div class="border border-slate-200 rounded-lg p-5 bg-slate-50/50">
-                    <h3 class="font-bold text-indigo-900 text-base mb-2">Exercise G – Part 2</h3>
-                    <div class="flex flex-wrap gap-2 text-xs bg-indigo-50 p-2.5 rounded border border-indigo-100 font-mono mb-4">
-                        <span class="font-semibold">Options:</span> A. abundant | B. restrict | C. investigate | D. distinctive | E. adapt | F. conflict
-                    </div>
-                    <div class="space-y-3 text-sm" id="exG2-container">
-                        <p>Wild animals living in cities often face challenges that their rural relatives rarely experience. Although food may be (1) <input type="text" data-ans="abundant" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> in urban areas because of human activities, animals must still learn how to avoid traffic and interact with people.</p>
-                        <p>Researchers continue to (2) <input type="text" data-ans="investigate" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> how these environmental changes influence animal behavior.</p>
-                        <p>Some species have developed (3) <input type="text" data-ans="distinctive" class="border rounded px-2 py-1 w-32 font-semibold text-indigo-900"> survival strategies, making them especially successful in urban environments.</p>
-                        <p>However, as wildlife populations grow, interactions between humans and animals may become more frequent, sometimes resulting in serious (4) <input type="text" data-ans="conflicts" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900">.</p>
-                        <p>To survive, many animals must (5) <input type="text" data-ans="adapt" class="border rounded px-2 py-1 w-28 font-semibold text-indigo-900"> their behavior to meet the demands of city life.</p>
-                    </div>
-                    <button onclick="checkSection('exG2-container')" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 transition">Check Exercise G (2) Answers</button>
-                    <div class="feedback-msg mt-3 text-xs hidden"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 4: PASSAGE QUIZ ================= -->
-        <section id="sec-passagequiz" class="tab-content hidden">
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                <h2 class="text-xl font-bold text-slate-900 mb-2">Wild Cities Text Comprehension Quiz</h2>
-                <p class="text-sm text-slate-500 mb-6">Test your comprehension of Paragraphs A through U from the Pathways 4 reading text.</p>
-
-                <div class="space-y-6 text-sm" id="passage-quiz-container">
-                    <!-- Q1 -->
-                    <div class="q-card border border-slate-200 rounded-lg p-4 bg-slate-50">
-                        <p class="font-semibold text-slate-900 mb-2">1. (Paragraph A) What is the postal carrier's reaction to the black bear sitting nearby?</p>
-                        <div class="space-y-1.5 ml-2">
-                            <label class="flex items-center gap-2"><input type="radio" name="pq1" value="A"> A) He runs away immediately to safety inside his mail truck.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq1" value="B"> B) He doesn't notice or doesn't seem to care as he strides across the street.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq1" value="C"> C) He calls animal control to report a hefty bear in downtown Asheville.</label>
-                        </div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div class="q-card border border-slate-200 rounded-lg p-4 bg-slate-50">
-                        <p class="font-semibold text-slate-900 mb-2">2. (Paragraph C) What is female bear N209 doing inside the gnarled silver maple tree?</p>
-                        <div class="space-y-1.5 ml-2">
-                            <label class="flex items-center gap-2"><input type="radio" name="pq2" value="A"> A) She is hibernating over the winter despite the rush of vehicles nearby.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq2" value="B"> B) She is chasing away a fox from her den.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq2" value="C"> C) She is attacking a team of wildlife biologists.</label>
-                        </div>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div class="q-card border border-slate-200 rounded-lg p-4 bg-slate-50">
-                        <p class="font-semibold text-slate-900 mb-2">3. (Paragraph F) What factors have boosted North America's black bear population to nearly 800,000?</p>
-                        <div class="space-y-1.5 ml-2">
-                            <label class="flex items-center gap-2"><input type="radio" name="pq3" value="A"> A) Strict relocation programs moved them back into deep mountain wilderness.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq3" value="B"> B) A combination of trends including land-use changes and tempting food buffets near people.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq3" value="C"> C) Heavy decline in urban coyote populations across North America.</label>
-                        </div>
-                    </div>
-
-                    <!-- Q4 -->
-                    <div class="q-card border border-slate-200 rounded-lg p-4 bg-slate-50">
-                        <p class="font-semibold text-slate-900 mb-2">4. (Paragraph L) Which of the following is true about Chicago's urban coyotes?</p>
-                        <div class="space-y-1.5 ml-2">
-                            <label class="flex items-center gap-2"><input type="radio" name="pq4" value="A"> A) They have been completely eradicated by federal predator control.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq4" value="B"> B) They are restricted solely to green parks and forest reserves.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq4" value="C"> C) They learn to avoid cars and can even read stoplights to survive.</label>
-                        </div>
-                    </div>
-
-                    <!-- Q5 -->
-                    <div class="q-card border border-slate-200 rounded-lg p-4 bg-slate-50">
-                        <p class="font-semibold text-slate-900 mb-2">5. (Paragraph P & Q) What did Sarah Benson-Amram's experiment demonstrate about raccoons?</p>
-                        <div class="space-y-1.5 ml-2">
-                            <label class="flex items-center gap-2"><input type="radio" name="pq5" value="A"> A) Most raccoons solved the reversal learning problem on the first night by tweaking their strategy.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq5" value="B"> B) Raccoons failed to operate buttons or foot pedals compared to coyotes.</label>
-                            <label class="flex items-center gap-2"><input type="radio" name="pq5" value="C"> C) Raccoons prefer avoiding humans rather than exploiting human resources.</label>
-                        </div>
-                    </div>
-
-                    <button onclick="checkPassageQuiz()" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition">Submit Reading Quiz</button>
-                    <div id="pq-feedback" class="mt-4 p-4 rounded-lg hidden text-sm"></div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        // Data derived directly from all images (Paragraphs A through U)
-        const vocabularyData = [
-            { word: "at first glance", para: "[Para A]", meaning: "乍看之下", context: "At first glance, it's a scene that plays out daily in cities across America." },
-            { word: "plays out", para: "[Para A]", meaning: "上演、發生", context: "...a scene that plays out daily in cities across America." },
-            { word: "strides across", para: "[Para A]", meaning: "大步走過", context: "...and strides across the street, letters in hand." },
-            { word: "unremarkable", para: "[Para A]", meaning: "平凡的 / 不起眼的", context: "That much is unremarkable." },
-            { word: "hefty", para: "[Para A]", meaning: "體型壯碩的", context: "...that a hefty American black bear, likely a young male..." },
-            { word: "shedding", para: "[Para A]", meaning: "正在脫落的", context: "...scratching his shedding winter coat." },
-            { word: "white noise", para: "[Para B]", meaning: "白噪音", context: "...interstate roars behind a fence, apparently just white noise to the bear." },
-            { word: "wanders", para: "[Para B]", meaning: "漫步", context: "...which eventually wanders down the sidewalk..." },
-            { word: "gnarled", para: "[Para C]", meaning: "粗糙扭曲的", context: "...inside a gnarled silver maple tree." },
-            { word: "hibernated", para: "[Para C]", meaning: "冬眠", context: "Bear N209 hibernated there over the winter..." },
-            { word: "adaptable", para: "[Para D]", meaning: "適應力強的", context: "They're so much more adaptable than we give them credit for." },
-            { word: "nestled in", para: "[Para E]", meaning: "坐落於", context: "In this city of about 95,000, nestled in the Blue Ridge Mountains..." },
-            { word: "embraced", meaning: "欣然接受", para: "[Para E]", context: "Some Asheville residents have embraced their furry neighbors..." },
-            { word: "advent", para: "[Para F]", meaning: "興起 / 出現", context: "The advent of the city bear in Asheville and elsewhere..." },
-            { word: "sprawling", para: "[Para F]", meaning: "向外擴張的", context: "...sprawling cities and suburbs have swallowed up large areas of bear habitat." },
-            { word: "habitat", para: "[Para F]", meaning: "棲息地", context: "...leaving the animals little choice but to adapt to living with human neighbors." },
-            { word: "coexist", para: "[Para H]", meaning: "共存", context: "We understand everyone has to coexist." },
-            { word: "metropolis", para: "[Para I]", meaning: "大都市", context: "The metropolis most synonymous with the urban coyote is Chicago." },
-            { word: "eradicate", para: "[Para L]", meaning: "根除 / 徹底消除", context: "Indeed, coyotes have succeeded despite our best efforts to eradicate them." },
-            { word: "cognition", para: "[Para O]", meaning: "認知能力", context: "...looking into raccoon behavior and cognition about a decade ago..." },
-            { word: "reversal learning", para: "[Para P]", meaning: "反向學習", context: "In an experiment called reversal learning, she presented raccoons with a box..." },
-            { word: "exploiting", para: "[Para Q]", meaning: "利用", context: "...they're successful by exploiting humans, not avoiding them." },
-            { word: "exploratory", para: "[Para T]", meaning: "喜歡探索的", context: "Urban raccoons are more exploratory than their country cousins." },
-            { word: "urbanizing", para: "[Para U]", meaning: "都市化", context: "We live on a planet that's rapidly urbanizing." }
-        ];
-
-        let currentIndex = 0;
-        let isFlipped = false;
-
-        function updateCardDisplay() {
-            const item = vocabularyData[currentIndex];
-            document.getElementById('card-para').innerText = item.para;
-            document.getElementById('card-word').innerText = item.word;
-            document.getElementById('card-meaning').innerText = item.meaning;
-            document.getElementById('card-context').innerText = `"${item.context}"`;
-            document.getElementById('card-counter').innerText = `${currentIndex + 1} / ${vocabularyData.length}`;
-            
-            // Reset flip
-            isFlipped = false;
-            document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
-        }
-
-        function flipCard() {
-            isFlipped = !isFlipped;
-            const inner = document.getElementById('flashcard-inner');
-            if (isFlipped) {
-                inner.classList.add('rotate-y-180');
-            } else {
-                inner.classList.remove('rotate-y-180');
-            }
-        }
-
-        function nextCard() {
-            currentIndex = (currentIndex + 1) % vocabularyData.length;
-            updateCardDisplay();
-        }
-
-        function prevCard() {
-            currentIndex = (currentIndex - 1 + vocabularyData.length) % vocabularyData.length;
-            updateCardDisplay();
-        }
-
-        function randomCard() {
-            currentIndex = Math.floor(Math.random() * vocabularyData.length);
-            updateCardDisplay();
-        }
-
-        function filterCards() {
-            const query = document.getElementById('card-search').value.toLowerCase();
-            const foundIndex = vocabularyData.findIndex(item => item.word.toLowerCase().includes(query));
-            if (foundIndex !== -1) {
-                currentIndex = foundIndex;
-                updateCardDisplay();
-            }
-        }
-
-        function switchTab(tabKey) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-900', 'text-white', 'shadow-sm');
-                btn.classList.add('bg-slate-200', 'text-slate-700');
-            });
-
-            document.getElementById(`sec-${tabKey}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tab-${tabKey}`);
-            activeBtn.classList.remove('bg-slate-200', 'text-slate-700');
-            activeBtn.classList.add('bg-indigo-900', 'text-white', 'shadow-sm');
-        }
-
-        function checkSection(containerId) {
-            const container = document.getElementById(containerId);
-            const inputs = container.querySelectorAll('input[type="text"]');
-            let correctCount = 0;
-
-            inputs.forEach(input => {
-                const targetAns = input.getAttribute('data-ans').trim().toLowerCase();
-                const userAns = input.value.trim().toLowerCase();
-
-                if (userAns === targetAns) {
-                    input.classList.remove('border-red-400', 'bg-red-50');
-                    input.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
-                    correctCount++;
-                } else {
-                    input.classList.remove('border-emerald-500', 'bg-emerald-50');
-                    input.classList.add('border-red-400', 'bg-red-50', 'text-red-900');
-                }
-            });
-
-            const msgDiv = container.nextElementSibling.nextElementSibling;
-            msgDiv.classList.remove('hidden');
-            if (correctCount === inputs.length) {
-                msgDiv.className = "feedback-msg mt-3 text-xs p-3 rounded-lg bg-emerald-100 text-emerald-800 font-semibold border border-emerald-200";
-                msgDiv.innerHTML = `✓ Excellent! All ${correctCount}/${inputs.length} answers are correct.`;
-            } else {
-                msgDiv.className = "feedback-msg mt-3 text-xs p-3 rounded-lg bg-red-100 text-red-800 font-medium border border-red-200";
-                msgDiv.innerHTML = `✗ You got ${correctCount} of ${inputs.length} correct. Red fields show incorrect answers; please review and retry.`;
-            }
-        }
-
-        function checkPassageQuiz() {
-            const answers = { pq1: "B", pq2: "A", pq3: "B", pq4: "C", pq5: "A" };
-            let score = 0;
-
-            for (let q in answers) {
-                const sel = document.querySelector(`input[name="${q}"]:checked`);
-                if (sel && sel.value === answers[q]) {
-                    score++;
-                }
-            }
-
-            const feedback = document.getElementById('pq-feedback');
-            feedback.classList.remove('hidden');
-            if (score === 5) {
-                feedback.className = "mt-4 p-4 rounded-lg text-sm bg-emerald-100 text-emerald-900 font-bold border border-emerald-300";
-                feedback.innerHTML = `🎉 Perfect Score! 5/5 correct. You have thoroughly understood the passage details!`;
-            } else {
-                feedback.className = "mt-4 p-4 rounded-lg text-sm bg-amber-100 text-amber-900 font-semibold border border-amber-300";
-                feedback.innerHTML = `You scored ${score}/5. Correct answers: 1-B, 2-A, 3-B, 4-C, 5-A. Review the text paragraphs to verify your answers!`;
-            }
-        }
-
-        // Initialize on load
-        window.onload = function() {
-            updateCardDisplay();
-        };
-    </script><!-- ... existing code ... -->
     <!-- Navigation Tabs -->
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('flashcards-tab')">1. Full Flashcards Deck</button>
-        <button class="tab-btn" onclick="switchTab('cloze-tab')">2. Fill in the Blanks (Ex A–G)</button>
-        <button class="tab-btn" onclick="switchTab('passage-quiz-tab')">3. Passage Comprehension Quiz</button>
-        <button class="tab-btn" onclick="switchTab('part1')">4. Grammar (Prepositions)</button>
-        <button class="tab-btn" onclick="switchTab('part3')">5. Grammar (S-V & Word Forms)</button>
+        <button class="tab-btn active" onclick="switchTab('flashcard-section')">1. Full Vocabulary Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('cloze-section')">2. Fill-in-the-Blanks (Ex A–G)</button>
+        <button class="tab-btn" onclick="switchTab('reading-section')">3. Wild Cities Passage Quiz</button>
+        <button class="tab-btn" onclick="switchTab('part1')">4. Prepositions (Act 1–3)</button>
+        <button class="tab-btn" onclick="switchTab('part3')">5. S-V & Word Forms</button>
         <button class="tab-btn" onclick="switchTab('part4')">6. Editing & Rewriting</button>
     </div>
 
-    <!-- FLASHCARDS TAB -->
-    <div id="flashcards-tab" class="section-panel active">
-        <h2 class="section-title">Pathways 4 Unit 2 Vocabulary Flashcards</h2>
-        <p style="text-align: center; color: var(--text-muted);">Click on the card to flip and reveal the Chinese definition and context. Use the controls to navigate through all 130 vocabulary terms.</p>
+    <!-- 1. FLASHCARD SECTION -->
+    <div id="flashcard-section" class="section-panel active">
+        <h2 class="section-title">Pathways 4 Unit 2 Vocabulary Flashcards Deck</h2>
+        <p style="text-align: center; color: var(--text-muted);">Click the card to flip and display the Chinese meaning and sentence context.</p>
 
-        <div style="perspective: 1000px; width: 100%; max-width: 520px; height: 280px; margin: 20px auto; cursor: pointer;" onclick="toggleCardFlip()">
-            <div id="active-card" style="width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.5s; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
-                <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 12px; padding: 20px; box-sizing: border-box; background: white; border: 1px solid var(--border);">
-                    <span id="fc-num" style="font-size: 0.85rem; color: var(--text-muted); position: absolute; top: 15px; left: 20px;">Term 1 of 130</span>
-                    <h2 id="fc-word" style="font-size: 2.2rem; color: var(--primary); margin: 0;">at first glance</h2>
-                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">Click to flip</p>
+        <div class="flashcard-wrap" onclick="toggleFlip()">
+            <div id="fc-card" class="flashcard-inner">
+                <div class="flashcard-front">
+                    <span id="fc-counter" style="font-size: 0.85rem; color: var(--text-muted); position: absolute; top: 15px; left: 20px;">Term 1 of 130</span>
+                    <h2 id="fc-word" style="font-size: 2.2rem; margin: 0; color: var(--primary);">at first glance</h2>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">Click to reveal meaning</p>
                 </div>
-                <div style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 12px; padding: 20px; box-sizing: border-box; background: var(--primary); color: white; transform: rotateY(180deg); text-align: center;">
+                <div class="flashcard-back">
                     <h3 id="fc-meaning" style="font-size: 1.8rem; margin: 0 0 10px 0;">乍看之下</h3>
                     <p id="fc-context" style="font-size: 0.95rem; opacity: 0.9;">[Para A] At first glance, it's a scene that plays out daily...</p>
                 </div>
             </div>
         </div>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px;">
-            <button class="btn-submit" onclick="navigateCard(-1)">Previous</button>
-            <input type="text" id="fc-search" placeholder="Search term..." style="max-width: 160px; text-align: center;" onkeyup="searchFlashcard()">
-            <button class="btn-submit" onclick="navigateCard(1)">Next</button>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
+            <button class="btn-submit" onclick="moveCard(-1)">Previous</button>
+            <input type="text" id="fc-search-input" placeholder="Search word..." style="max-width: 180px; text-align: center;" onkeyup="searchCard()">
+            <button class="btn-submit" onclick="moveCard(1)">Next</button>
         </div>
     </div>
 
-    <!-- FILL IN THE BLANKS (EXERCISES A - G) -->
-    <div id="cloze-tab" class="section-panel">
+    <!-- 2. CLOZE QUIZZES SECTION (EXERCISES A - G) -->
+    <div id="cloze-section" class="section-panel">
         <h2 class="section-title">Vocabulary Worksheets (Exercises A – G)</h2>
 
         <!-- Exercise A -->
         <div class="instruction-box">
-            <strong>Exercise A – Vocabulary Collocations / Matching Cloze:</strong><br>
-            Fill in the blanks using combined terms from Column A and Column B.
+            <strong>Exercise A – Collocations & Contextual Cloze:</strong> Combine words from Column A and Column B.
             <div class="word-bank" style="margin-top: 8px; margin-bottom: 0;">
                 Column A: coexist, open, swallow, exploratory, vehicle, survival<br>
                 Column B: behavior, minded, with, up, skills, strikes
             </div>
         </div>
-
-        <div class="exercise-item" id="exa-q1">
+        <div class="exercise-item" id="cloze-exA">
             <span class="question-label">As cities continue to grow, they often (1) ____________ nearby forests, forcing wild animals to live closer to humans. Some animals develop excellent (2) ____________ to adapt to urban environments. Their (3) ____________ allows them to search for food in unfamiliar places. However, they may face dangers such as (4) ____________ when crossing busy roads. To reduce conflicts, people should remain (5) ____________ and learn how to (6) ____________ wildlife in their neighborhoods.</span>
             <div class="input-group">
-                <input type="text" class="short-input" id="exa-1" placeholder="1">
-                <input type="text" class="short-input" id="exa-2" placeholder="2">
-                <input type="text" class="short-input" id="exa-3" placeholder="3">
-                <input type="text" class="short-input" id="exa-4" placeholder="4">
-                <input type="text" class="short-input" id="exa-5" placeholder="5">
-                <input type="text" class="short-input" id="exa-6" placeholder="6">
+                <input type="text" class="short-input" id="exA-1" placeholder="1">
+                <input type="text" class="short-input" id="exA-2" placeholder="2">
+                <input type="text" class="short-input" id="exA-3" placeholder="3">
+                <input type="text" class="short-input" id="exA-4" placeholder="4">
+                <input type="text" class="short-input" id="exA-5" placeholder="5">
+                <input type="text" class="short-input" id="exA-6" placeholder="6">
             </div>
-            <button class="btn-submit" onclick="checkMultiText('exa-q1', ['swallow up', 'survival skills', 'exploratory behavior', 'vehicle strikes', 'open-minded', 'coexist with'])">Check Answer</button>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exA', ['swallow up', 'survival skills', 'exploratory behavior', 'vehicle strikes', 'open-minded', 'coexist with'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
         <!-- Exercise B -->
         <div class="instruction-box" style="margin-top: 30px;">
-            <strong>Exercise B – Vocabulary Practice:</strong><br>
+            <strong>Exercise B – Vocabulary Practice:</strong>
             <div class="word-bank" style="margin-top: 8px; margin-bottom: 0;">
                 Column A: scientific, front, nutrition, chase, associated, wander<br>
                 Column B: off, porch, with, down, literature, dense
             </div>
         </div>
-
-        <div class="exercise-item" id="exb-q1">
+        <div class="exercise-item" id="cloze-exB">
             <span class="question-label">Wild animals are becoming more common in suburban areas. Some raccoons (1) ____________ residential streets at night, searching for food. They may even visit someone's (2) ____________ to look for leftovers. The health risks they face are often (3) ____________ food found in garbage bins. Although some people try to (4) ____________ these animals, others enjoy watching them. According to (5) ____________, urban wildlife can adapt surprisingly well to human environments.</span>
             <div class="input-group">
-                <input type="text" class="short-input" id="exb-1" placeholder="1">
-                <input type="text" class="short-input" id="exb-2" placeholder="2">
-                <input type="text" class="short-input" id="exb-3" placeholder="3">
-                <input type="text" class="short-input" id="exb-4" placeholder="4">
-                <input type="text" class="short-input" id="exb-5" placeholder="5">
+                <input type="text" class="short-input" id="exB-1" placeholder="1">
+                <input type="text" class="short-input" id="exB-2" placeholder="2">
+                <input type="text" class="short-input" id="exB-3" placeholder="3">
+                <input type="text" class="short-input" id="exB-4" placeholder="4">
+                <input type="text" class="short-input" id="exB-5" placeholder="5">
             </div>
-            <button class="btn-submit" onclick="checkMultiText('exb-q1', ['wander down', 'front porch', 'associated with', 'chase off', 'scientific literature'])">Check Answer</button>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exB', ['wander down', 'front porch', 'associated with', 'chase off', 'scientific literature'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
         <!-- Exercise C -->
         <div class="instruction-box" style="margin-top: 30px;">
-            <strong>Exercise C – Vocabulary Practice:</strong><br>
+            <strong>Exercise C – Vocabulary Practice:</strong>
             <div class="word-bank" style="margin-top: 8px; margin-bottom: 0;">
                 Column A: figure, rapidly, minimize, white, crafty, step<br>
                 Column B: out, noise, urbanizing, out, conflicts, reputation
             </div>
         </div>
-
-        <div class="exercise-item" id="exc-q1">
+        <div class="exercise-item" id="cloze-exC">
             <span class="question-label">In a (1) ____________ city, wild animals must learn to adapt to human activities. Some animals can (2) ____________ how to find food and avoid busy roads. The sound of traffic may become a kind of (3) ____________ to them. However, people should also learn to be cautious when they (4) ____________ of their houses and respect wildlife. Building green spaces can help (5) ____________ between humans and animals.</span>
             <div class="input-group">
-                <input type="text" class="short-input" id="exc-1" placeholder="1">
-                <input type="text" class="short-input" id="exc-2" placeholder="2">
-                <input type="text" class="short-input" id="exc-3" placeholder="3">
-                <input type="text" class="short-input" id="exc-4" placeholder="4">
-                <input type="text" class="short-input" id="exc-5" placeholder="5">
+                <input type="text" class="short-input" id="exC-1" placeholder="1">
+                <input type="text" class="short-input" id="exC-2" placeholder="2">
+                <input type="text" class="short-input" id="exC-3" placeholder="3">
+                <input type="text" class="short-input" id="exC-4" placeholder="4">
+                <input type="text" class="short-input" id="exC-5" placeholder="5">
             </div>
-            <button class="btn-submit" onclick="checkMultiText('exc-q1', ['rapidly urbanizing', 'figure out', 'white noise', 'step out', 'minimize conflicts'])">Check Answer</button>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exC', ['rapidly urbanizing', 'figure out', 'white noise', 'step out', 'minimize conflicts'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
         <!-- Exercise E -->
         <div class="instruction-box" style="margin-top: 30px;">
-            <strong>Exercise E – Word Form Fill-in-the-Blanks:</strong><br>
+            <strong>Exercise E – Word Form Selection:</strong><br>
             A. investigate | B. territory | C. tempting | D. adapt | E. harmony | F. exploit
         </div>
-
-        <div class="exercise-item" id="exe-q1">
+        <div class="exercise-item" id="cloze-exE">
             <span class="question-label">As human cities continue to expand, wild animals are increasingly forced to live near people. To survive in these unfamiliar environments, animals must (1) ____________ to new surroundings and learn different survival strategies. Food waste left outside homes and restaurants provides a (2) ____________ source of food for many species. Clever animals, such as raccoons, have learned to (3) ____________ human activities to their advantage. Unlike animals in rural areas, some city animals are less (4) ____________ and more willing to share their living spaces. Scientists are now (5) ____________ how urban environments influence animal behavior and what humans can do to reduce conflicts with wildlife.</span>
             <div class="input-group">
-                <input type="text" class="short-input" id="exe-1" placeholder="1">
-                <input type="text" class="short-input" id="exe-2" placeholder="2">
-                <input type="text" class="short-input" id="exe-3" placeholder="3">
-                <input type="text" class="short-input" id="exe-4" placeholder="4">
-                <input type="text" class="short-input" id="exe-5" placeholder="5">
+                <input type="text" class="short-input" id="exE-1" placeholder="1">
+                <input type="text" class="short-input" id="exE-2" placeholder="2">
+                <input type="text" class="short-input" id="exE-3" placeholder="3">
+                <input type="text" class="short-input" id="exE-4" placeholder="4">
+                <input type="text" class="short-input" id="exE-5" placeholder="5">
             </div>
-            <button class="btn-submit" onclick="checkMultiText('exe-q1', ['adapt', 'tempting', 'exploit', 'territorial', 'investigating'])">Check Answer</button>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exE', ['adapt', 'tempting', 'exploit', 'territorial', 'investigating'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
         <!-- Exercise F -->
         <div class="instruction-box" style="margin-top: 30px;">
-            <strong>Exercise F – Word Form Fill-in-the-Blanks:</strong><br>
+            <strong>Exercise F – Word Form Selection:</strong><br>
             A. urbanize | B. eradicate | C. encounter | D. flexible | E. underestimate | F. coexist
         </div>
-
-        <div class="exercise-item" id="exf-q1">
+        <div class="exercise-item" id="cloze-exF">
             <span class="question-label">As more natural areas disappear, wildlife is increasingly moving into cities. This process is part of a larger trend in which human societies continue to (1) ____________ the environment. Although people sometimes view wild animals as dangerous pests, they often (2) ____________ their ability to survive in unfamiliar surroundings. Animals such as coyotes have developed (3) ____________ eating habits, allowing them to find food in many different places. While some communities have attempted to (4) ____________ these animals, such efforts have rarely been completely successful. Instead, scientists believe that humans and wildlife must learn to (5) ____________ peacefully in shared environments.</span>
             <div class="input-group">
-                <input type="text" class="short-input" id="exf-1" placeholder="1">
-                <input type="text" class="short-input" id="exf-2" placeholder="2">
-                <input type="text" class="short-input" id="exf-3" placeholder="3">
-                <input type="text" class="short-input" id="exf-4" placeholder="4">
-                <input type="text" class="short-input" id="exf-5" placeholder="5">
+                <input type="text" class="short-input" id="exF-1" placeholder="1">
+                <input type="text" class="short-input" id="exF-2" placeholder="2">
+                <input type="text" class="short-input" id="exF-3" placeholder="3">
+                <input type="text" class="short-input" id="exF-4" placeholder="4">
+                <input type="text" class="short-input" id="exF-5" placeholder="5">
             </div>
-            <button class="btn-submit" onclick="checkMultiText('exf-q1', ['urbanize', 'underestimate', 'flexible', 'eradicate', 'coexist'])">Check Answer</button>
+            <button class="btn-submit" onclick="checkMultiText('cloze-exF', ['urbanize', 'underestimate', 'flexible', 'eradicate', 'coexist'])">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
     </div>
 
-    <!-- PASSAGE COMPREHENSION QUIZ -->
-    <div id="passage-quiz-tab" class="section-panel">
+    <!-- 3. READING PASSAGE COMPREHENSION QUIZ -->
+    <div id="reading-section" class="section-panel">
         <h2 class="section-title">Reading Passage Quiz: "Wild Cities"</h2>
 
-        <div class="exercise-item" id="p-q1">
-            <span class="question-label">1. In Paragraph A, what is the hefty young black bear doing when the postal carrier strides across the street?</span>
+        <div class="exercise-item" id="read-q1">
+            <span class="question-label">1. In Paragraph A, what is the hefty young black bear doing when the postman strides across the street?</span>
             <div class="options-list">
-                <label class="radio-option"><input type="radio" name="pq1" value="A"> A. Climbing up a silver maple tree</label>
-                <label class="radio-option"><input type="radio" name="pq1" value="B"> B. Sitting a few yards away and vigorously scratching his shedding winter coat</label>
-                <label class="radio-option"><input type="radio" name="pq1" value="C"> C. Searching for food in a mail truck</label>
-                <label class="radio-option"><input type="radio" name="pq1" value="D"> D. Running toward the downtown center of Asheville</label>
+                <label class="radio-option"><input type="radio" name="rq1" value="A"> A. Climbing up a silver maple tree</label>
+                <label class="radio-option"><input type="radio" name="rq1" value="B"> B. Sitting a few yards away and vigorously scratching his shedding coat</label>
+                <label class="radio-option"><input type="radio" name="rq1" value="C"> C. Searching for food inside a mail truck</label>
+                <label class="radio-option"><input type="radio" name="rq1" value="D"> D. Running toward the downtown center of Asheville</label>
             </div>
-            <button class="btn-submit" onclick="checkMCQ('p-q1', 'pq1', 'B')">Check Answer</button>
+            <button class="btn-submit" onclick="checkMCQ('read-q1', 'rq1', 'B')">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
-        <div class="exercise-item" id="p-q2">
-            <span class="question-label">2. According to Paragraph F, which two main factors have boosted North America's black bear population to nearly 800,000?</span>
+        <div class="exercise-item" id="read-q2">
+            <span class="question-label">2. According to Paragraph F, which two factors boosted North America's black bear population to nearly 800,000?</span>
             <div class="options-list">
-                <label class="radio-option"><input type="radio" name="pq2" value="A"> A. Warmer winter temperatures and fewer predators</label>
-                <label class="radio-option"><input type="radio" name="pq2" value="B"> B. Strict government protection laws and artificial breeding</label>
-                <label class="radio-option"><input type="radio" name="pq2" value="C"> C. Changes in land use and tempting food buffets available near human settlements</label>
-                <label class="radio-option"><input type="radio" name="pq2" value="D"> D. Relocation to national parks and suburban forests</label>
+                <label class="radio-option"><input type="radio" name="rq2" value="A"> A. Warmer winter temperatures and fewer predators</label>
+                <label class="radio-option"><input type="radio" name="rq2" value="B"> B. Strict government protection laws and artificial breeding</label>
+                <label class="radio-option"><input type="radio" name="rq2" value="C"> C. Changes in land use and tempting food buffets available near people</label>
+                <label class="radio-option"><input type="radio" name="rq2" value="D"> D. Relocation to national parks and suburban forests</label>
             </div>
-            <button class="btn-submit" onclick="checkMCQ('p-q2', 'pq2', 'C')">Check Answer</button>
+            <button class="btn-submit" onclick="checkMCQ('read-q2', 'rq2', 'C')">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
-        <div class="exercise-item" id="p-q3">
-            <span class="question-label">3. What did researchers discover regarding Chicago's coyote population in Paragraph L?</span>
+        <div class="exercise-item" id="read-q3">
+            <span class="question-label">3. What surprising capability of urban coyotes in Chicago is described in Paragraph L?</span>
             <div class="options-list">
-                <label class="radio-option"><input type="radio" name="pq3" value="A"> A. Coyotes are restricted entirely to green parks.</label>
-                <label class="radio-option"><input type="radio" name="pq3" value="B"> B. Coyotes have learned to avoid cars and can even read stoplights.</label>
-                <label class="radio-option"><input type="radio" name="pq3" value="C"> C. Federal predator control has successfully eradicated all urban coyotes.</label>
-                <label class="radio-option"><input type="radio" name="pq3" value="D"> D. Coyotes depend exclusively on captive rabbits for food.</label>
+                <label class="radio-option"><input type="radio" name="rq3" value="A"> A. They navigate exclusively via underground tunnels.</label>
+                <label class="radio-option"><input type="radio" name="rq3" value="B"> B. They have learned to avoid cars and can even read stoplights.</label>
+                <label class="radio-option"><input type="radio" name="rq3" value="C"> C. Federal predator control has completely eradicated them.</label>
+                <label class="radio-option"><input type="radio" name="rq3" value="D"> D. They rely only on captive food sources.</label>
             </div>
-            <button class="btn-submit" onclick="checkMCQ('p-q3', 'pq3', 'B')">Check Answer</button>
+            <button class="btn-submit" onclick="checkMCQ('read-q3', 'rq3', 'B')">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
 
-        <div class="exercise-item" id="p-q4">
-            <span class="question-label">4. In Benson-Amram's cognitive study on raccoons (Paragraph P), what happened during the "reversal learning" experiment when researchers switched the pedals and buttons?</span>
+        <div class="exercise-item" id="read-q4">
+            <span class="question-label">4. In Benson-Amram's cognitive study on raccoons (Paragraph P), what happened during the "reversal learning" test?</span>
             <div class="options-list">
-                <label class="radio-option"><input type="radio" name="pq4" value="A"> A. Raccoons failed to solve the problem and abandoned the box.</label>
-                <label class="radio-option"><input type="radio" name="pq4" value="B"> B. Most raccoons tweaked their strategy and solved the puzzle on the first night.</label>
-                <label class="radio-option"><input type="radio" name="pq4" value="C"> C. It took the raccoons 44 nights of testing to figure out the solution.</label>
-                <label class="radio-option"><input type="radio" name="pq4" value="D"> D. Only rural raccoons were able to get the food reward.</label>
+                <label class="radio-option"><input type="radio" name="rq4" value="A"> A. Most raccoons tweaked their strategy and solved the puzzle on the first night.</label>
+                <label class="radio-option"><input type="radio" name="rq4" value="B"> B. The animals broke out of their cages and escaped.</label>
+                <label class="radio-option"><input type="radio" name="rq4" value="C"> C. Raccoons took 44 nights of testing to figure out the pedal mechanism.</label>
+                <label class="radio-option"><input type="radio" name="rq4" value="D"> D. Rural raccoons outperformed urban raccoons.</label>
             </div>
-            <button class="btn-submit" onclick="checkMCQ('p-q4', 'pq4', 'B')">Check Answer</button>
+            <button class="btn-submit" onclick="checkMCQ('read-q4', 'rq4', 'A')">Check Answer</button>
             <div class="feedback-box"></div>
         </div>
     </div>
 
-<!-- ... existing code ... -->
+    <!-- 4. PART 1: PREPOSITIONS -->
+    <div id="part1" class="section-panel">
+        <h2 class="section-title">Writing with Prepositions: Activities 1 & 2</h2>
+
+        <div class="instruction-box">
+            <strong>Activity 2 – Choose the Correct Preposition:</strong> Select the correct preposition from the options provided.
+        </div>
+
+        <div class="exercise-item" id="act2-q1">
+            <span class="question-label">1. Students involved (in / for) musical activities often experience a sense (of / with) belonging.</span>
+            <div class="input-group">
+                <select id="act2-q1-sel1"><option value="">Select</option><option value="in">in</option><option value="for">for</option></select>
+                <select id="act2-q1-sel2"><option value="">Select</option><option value="of">of</option><option value="with">with</option></select>
+            </div>
+            <button class="btn-submit" onclick="checkMultiSelect('act2-q1', ['in', 'of'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act2-q2">
+            <span class="question-label">2. Scientists are studying the connection (between / with) air pollution and childhood asthma.</span>
+            <div class="input-group">
+                <select id="act2-q2-sel1"><option value="">Select</option><option value="between">between</option><option value="with">with</option></select>
+            </div>
+            <button class="btn-submit" onclick="checkMultiSelect('act2-q2', ['between'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act2-q3">
+            <span class="question-label">3. (In / On) January 2020, the team arrived (at / in) the station a week (before / since) the others.</span>
+            <div class="input-group">
+                <select id="act2-q3-sel1"><option value="">Select</option><option value="In">In</option><option value="On">On</option></select>
+                <select id="act2-q3-sel2"><option value="">Select</option><option value="at">at</option><option value="in">in</option></select>
+                <select id="act2-q3-sel3"><option value="">Select</option><option value="before">before</option><option value="since">since</option></select>
+            </div>
+            <button class="btn-submit" onclick="checkMultiSelect('act2-q3', ['In', 'at', 'before'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act2-q4">
+            <span class="question-label">4. Employers are searching (for / of) applicants (with / of) strong communication skills.</span>
+            <div class="input-group">
+                <select id="act2-q4-sel1"><option value="">Select</option><option value="for">for</option><option value="of">of</option></select>
+                <select id="act2-q4-sel2"><option value="">Select</option><option value="with">with</option><option value="of">of</option></select>
+            </div>
+            <button class="btn-submit" onclick="checkMultiSelect('act2-q4', ['for', 'with'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act2-q5">
+            <span class="question-label">5. Water rises (into / above) the air as vapor and contributes (to / for) the formation (of / with) clouds.</span>
+            <div class="input-group">
+                <select id="act2-q5-sel1"><option value="">Select</option><option value="into">into</option><option value="above">above</option></select>
+                <select id="act2-q5-sel2"><option value="">Select</option><option value="to">to</option><option value="for">for</option></select>
+                <select id="act2-q5-sel3"><option value="">Select</option><option value="of">of</option><option value="with">with</option></select>
+            </div>
+            <button class="btn-submit" onclick="checkMultiSelect('act2-q5', ['into', 'to', 'of'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+    </div>
+
+    <!-- 5. PART 3: WORD FORMS & S-V AGREEMENT -->
+    <div id="part3" class="section-panel">
+        <h2 class="section-title">Word Forms & Subject-Verb Agreement</h2>
+
+        <div class="instruction-box">
+            <strong>Activity 4 – Word Form Transformation:</strong> Write the correct form of the word in parentheses.
+        </div>
+
+        <div class="exercise-item" id="act4-q1">
+            <span class="question-label">1. Young children are capable of ________________ (recognize) familiar voices.</span>
+            <input type="text" id="act4-q1-v1" placeholder="Word form...">
+            <button class="btn-submit" onclick="checkMultiText('act4-q1', ['recognizing'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act4-q2">
+            <span class="question-label">2. Conservationists are worried about ________________ (damage) natural habitats.</span>
+            <input type="text" id="act4-q2-v1" placeholder="Word form...">
+            <button class="btn-submit" onclick="checkMultiText('act4-q2', ['damaging'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="instruction-box" style="margin-top: 35px;">
+            <strong>Activity 5 – Subject-Verb Agreement:</strong> Write the correct simple present or present continuous forms.
+        </div>
+
+        <div class="exercise-item" id="act5-q1">
+            <span class="question-label">1. Using a device for measuring air quality ______ (be, simple present) helpful. The accuracy of these instruments ______ (depend, simple present) on proper calibration.</span>
+            <div class="input-group">
+                <input type="text" class="short-input" id="act5-q1-v1" placeholder="Verb 1">
+                <input type="text" class="short-input" id="act5-q1-v2" placeholder="Verb 2">
+            </div>
+            <button class="btn-submit" onclick="checkMultiText('act5-q1', ['is', 'depends'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="act5-q2">
+            <span class="question-label">2. Phones without physical keyboards ______ (become, present progressive) less common. The percentage of users with such phones ______ (be, simple present) small.</span>
+            <div class="input-group">
+                <input type="text" class="short-input" id="act5-q2-v1" placeholder="Verb 1">
+                <input type="text" class="short-input" id="act5-q2-v2" placeholder="Verb 2">
+            </div>
+            <button class="btn-submit" onclick="checkMultiText('act5-q2', ['are becoming', 'is'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+    </div>
+
+    <!-- 6. PART 4: EDITING & REWRITING -->
+    <div id="part4" class="section-panel">
+        <h2 class="section-title">Exercise 9 – Editing & Sentence Transformations</h2>
+
+        <div class="exercise-item" id="ex9-q1">
+            <span class="question-label">1. Change sentence 2 to a participial phrase beginning with <em>Writing</em>. Delete <em>John Smith</em>. Then combine sentences 2 and 3.</span>
+            <input type="text" id="ex9-q1-v" placeholder="Type combined sentence...">
+            <button class="btn-submit" onclick="checkTextMatch('ex9-q1-v', 'ex9-q1', ['Writing in Wired magazine on May 10, 2022, John Smith describes a massive new effort among tech giants, traditional automakers, and city planners to create vehicles that can navigate traffic, avoid pedestrians, or reduce emissions.'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="ex9-q2">
+            <span class="question-label">2. Summaries should include attribution to the author of the original piece. Insert <em>According to Smith</em> at the beginning of sentence 4.</span>
+            <input type="text" id="ex9-q2-v" placeholder="Type modified sentence 4...">
+            <button class="btn-submit" onclick="checkTextMatch('ex9-q2-v', 'ex9-q2', ['According to Smith, self-driving cars could offer significant benefits in many cities.'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+
+        <div class="exercise-item" id="ex9-q3">
+            <span class="question-label">3. In sentence 5, replace <em>that can be customized</em> with the adjective <em>customizable</em> before <em>delivery vans</em>.</span>
+            <input type="text" id="ex9-q3-v" placeholder="Type modified sentence 5...">
+            <button class="btn-submit" onclick="checkTextMatch('ex9-q3-v', 'ex9-q3', ['For instance, customizable delivery vans could detect if a route is congested and then find a faster path.'])">Check Answer</button>
+            <div class="feedback-box"></div>
+        </div>
+    </div>
+
+</div>
+
 <script>
-    // Flashcard Dataset built from images 13-18
+    // Tab Switching Functionality
+    function switchTab(tabId) {
+        document.querySelectorAll('.section-panel').forEach(panel => panel.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // Flashcard Dataset built from images
     const flashcardsData = [
         { word: "at first glance", meaning: "乍看之下", context: "[Para A] At first glance, it's a scene that plays out daily..." },
         { word: "plays out", meaning: "上演、發生", context: "[Para A] ...a scene that plays out daily in cities across America." },
@@ -734,19 +680,19 @@
         { word: "exploratory", meaning: "喜歡探索的", context: "[Para T] ...urban raccoons are more exploratory than their country cousins." }
     ];
 
-    let currentFcIndex = 0;
+    let currentCardIdx = 0;
 
-    function renderCard() {
-        const item = flashcardsData[currentFcIndex];
-        document.getElementById('fc-num').textContent = `Term ${currentFcIndex + 1} of ${flashcardsData.length}`;
+    function renderFlashcard() {
+        const item = flashcardsData[currentCardIdx];
+        document.getElementById('fc-counter').textContent = `Term ${currentCardIdx + 1} of ${flashcardsData.length}`;
         document.getElementById('fc-word').textContent = item.word;
         document.getElementById('fc-meaning').textContent = item.meaning;
         document.getElementById('fc-context').textContent = item.context;
-        document.getElementById('active-card').style.transform = 'rotateY(0deg)';
+        document.getElementById('fc-card').style.transform = 'rotateY(0deg)';
     }
 
-    function toggleCardFlip() {
-        const card = document.getElementById('active-card');
+    function toggleFlip() {
+        const card = document.getElementById('fc-card');
         if (card.style.transform === 'rotateY(180deg)') {
             card.style.transform = 'rotateY(0deg)';
         } else {
@@ -754,39 +700,106 @@
         }
     }
 
-    function navigateCard(direction) {
-        currentFcIndex = (currentFcIndex + direction + flashcardsData.length) % flashcardsData.length;
-        renderCard();
+    function moveCard(step) {
+        currentCardIdx = (currentCardIdx + step + flashcardsData.length) % flashcardsData.length;
+        renderFlashcard();
     }
 
-    function searchFlashcard() {
-        const query = document.getElementById('fc-search').value.toLowerCase().trim();
+    function searchCard() {
+        const query = document.getElementById('fc-search-input').value.toLowerCase().trim();
         if (!query) return;
-        const idx = flashcardsData.findIndex(item => item.word.toLowerCase().includes(query) || item.meaning.includes(query));
-        if (idx !== -1) {
-            currentFcIndex = idx;
-            renderCard();
+        const foundIndex = flashcardsData.findIndex(card => card.word.toLowerCase().includes(query) || card.meaning.includes(query));
+        if (foundIndex !== -1) {
+            currentCardIdx = foundIndex;
+            renderFlashcard();
         }
     }
 
-    // Initialize on load
+    // Evaluation Logic
+    function checkMultiSelect(containerId, expectedList) {
+        const container = document.getElementById(containerId);
+        const selects = container.querySelectorAll('select');
+        const feedback = container.querySelector('.feedback-box');
+        let isCorrect = true;
+
+        selects.forEach((sel, i) => {
+            if (sel.value.trim().toLowerCase() !== expectedList[i].toLowerCase()) {
+                isCorrect = false;
+            }
+        });
+
+        if (isCorrect) {
+            feedback.className = 'feedback-box correct';
+            feedback.innerHTML = '<strong>Correct!</strong> All choices are accurate.';
+        } else {
+            feedback.className = 'feedback-box incorrect';
+            feedback.innerHTML = '<strong>Incorrect.</strong> Correct answer(s): <em>' + expectedList.join(', ') + '</em>.';
+        }
+    }
+
+    function checkMultiText(containerId, expectedList) {
+        const container = document.getElementById(containerId);
+        const inputs = container.querySelectorAll('input[type="text"]');
+        const feedback = container.querySelector('.feedback-box');
+        let isCorrect = true;
+
+        inputs.forEach((inp, i) => {
+            if (inp.value.trim().toLowerCase() !== expectedList[i].toLowerCase()) {
+                isCorrect = false;
+            }
+        });
+
+        if (isCorrect) {
+            feedback.className = 'feedback-box correct';
+            feedback.innerHTML = '<strong>Correct!</strong> Excellent performance.';
+        } else {
+            feedback.className = 'feedback-box incorrect';
+            feedback.innerHTML = '<strong>Incorrect.</strong> Correct answer(s): <em>' + expectedList.join(', ') + '</em>.';
+        }
+    }
+
+    function checkMCQ(containerId, groupName, correctOption) {
+        const container = document.getElementById(containerId);
+        const selected = container.querySelector(`input[name="${groupName}"]:checked`);
+        const feedback = container.querySelector('.feedback-box');
+
+        if (!selected) {
+            feedback.className = 'feedback-box incorrect';
+            feedback.innerHTML = 'Please choose an option first.';
+            return;
+        }
+
+        if (selected.value === correctOption) {
+            feedback.className = 'feedback-box correct';
+            feedback.innerHTML = '<strong>Correct!</strong> Option ' + correctOption + ' is right.';
+        } else {
+            feedback.className = 'feedback-box incorrect';
+            feedback.innerHTML = '<strong>Incorrect.</strong> Correct option is <strong>' + correctOption + '</strong>.';
+        }
+    }
+
+    function checkTextMatch(inputId, containerId, validAnswers) {
+        const input = document.getElementById(inputId);
+        const container = document.getElementById(containerId);
+        const feedback = container.querySelector('.feedback-box');
+        const userVal = input.value.trim().replace(/\s+/g, ' ').toLowerCase();
+
+        const matchFound = validAnswers.some(ans => ans.toLowerCase() === userVal);
+
+        if (matchFound) {
+            feedback.className = 'feedback-box correct';
+            feedback.innerHTML = '<strong>Correct!</strong> Your sentence matches standard requirements.';
+        } else {
+            feedback.className = 'feedback-box incorrect';
+            feedback.innerHTML = '<strong>Incorrect or incomplete.</strong><br><em>Sample Answer:</em> ' + validAnswers[0];
+        }
+    }
+
     window.onload = function() {
-        renderCard();
+        renderFlashcard();
     };
 </script>
-<!-- ... existing code ... -->
-```eof
 
-### Key Updates Made
-1. **Added Full Vocabulary Flashcard Deck:** Populated with flashcards containing English terms, Chinese meanings, and passage context snippets covering the complete list of annotated terms. Includes interactive flip controls, next/previous navigation, and live search.
-2. **Added Worksheets (Exercises A, B, C, E, F):** Fully digitized exercises A through F from the second image set, complete with text inputs and multi-response answer verification.
-3. **Passage-Based Reading Comprehension Quiz:** Created reading questions based on paragraphs A through U of the passage.
 </body>
 </html>
 ```eof
-
-### Summary of Updates
-1. **Flashcard Learning Tool**: Complete interactive flashcard interface featuring English expressions, Chinese meanings, paragraph tags, and excerpt context for terms across all images.
-2. **Collocation Matching Quizzes (A–D)**: Transcribed Exercises A, B, C, and D from image 19 into interactive fill-in-the-blank collocation activities with individual answer verification.
-3. **Contextual Vocabulary Cloze Exercises (E–G)**: Recreated Exercises E, F, G (Part 1), and G (Part 2) from image 20 with exact answer matching and form change logic.
-4. **Passage Comprehension Quiz**: Added multiple-choice questions testing key reading details from Paragraphs A through U of the "Wild Cities" unit.
