@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathways 4 Unit 2 - Wild Cities Vocabulary Study Portal</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --success-color: #15803d;
+            --success-bg: #f0fdf4;
+            --error-color: #b91c1c;
+            --error-bg: #fef2f2;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 24px;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        header p {
+            margin: 6px 0 0 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: #ffffff;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .flashcard {
+            width: 100%;
+            max-width: 500px;
+            height: 260px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 12px;
+            background-color: #ffffff;
+        }
+
+        .flashcard-front {
+            border-top: 6px solid var(--primary-color);
+        }
+
+        .flashcard-back {
+            background-color: #f1f5f9;
+            transform: rotateY(180deg);
+            border-top: 6px solid var(--secondary-color);
+        }
+
+        .card-term {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card-num {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .card-meaning {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .card-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-action {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Quiz Styles */
+        .quiz-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quiz-item:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-question {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .quiz-input-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .feedback-box {
+            margin-top: 12px;
+            padding: 12px 16px;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background-color: var(--success-bg);
+            border: 1px solid #bbf7d0;
+            color: var(--success-color);
+        }
+
+        .feedback-box.incorrect {
+            display: block;
+            background-color: var(--error-bg);
+            border: 1px solid #fecaca;
+            color: var(--error-color);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Pathways 4: Unit 2 "Wild Cities"</h1>
+    <p>Academic Vocabulary Practice Module (Items 1–130)</p>
+</header>
+
+<div class="container">
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">1. Vocabulary Flashcard</button>
+        <button class="tab-btn" onclick="switchTab('quiz')">2. Fill-in-the-Blank Quiz</button>
+    </div>
+
+    <!-- TAB 1: FLASHCARD -->
+    <div id="flashcards" class="tab-content active">
+        <div class="flashcard-wrapper">
+            <div class="flashcard" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div class="card-num" id="card-num">Item 1 of 130</div>
+                        <div class="card-term" id="card-term">glance</div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 15px;">(Click card to view Chinese meaning)</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="card-num">Chinese Meaning</div>
+                        <div class="card-meaning" id="card-meaning">看一眼</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-controls">
+                <button class="btn-action" onclick="prevCard()">Previous</button>
+                <button class="btn-action" onclick="randomCard()">Random</button>
+                <button class="btn-action" onclick="nextCard()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: FILL-IN-THE-BLANK QUIZ -->
+    <div id="flashcard-quiz" class="tab-content" id="quiz">
+        <h2 style="margin-top: 0; color: var(--primary-color);">Fill-in-the-Blank Vocabulary Assessment</h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">Enter the correct English word or phrase corresponding to the Chinese definition.</p>
+
+        <div id="quiz-container">
+            <!-- Quiz items dynamically generated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const vocabList = [
+        { id: 1, term: "glance", meaning: "看一眼" },
+        { id: 2, term: "plays out", meaning: "上演、發生" },
+        { id: 3, term: "steps out of", meaning: "從…走出來" },
+        { id: 4, term: "strides across", meaning: "大步走過" },
+        { id: 5, term: "unremarkable", meaning: "平凡的" },
+        { id: 6, term: "hefty", meaning: "體型壯碩的" },
+        { id: 7, term: "yards", meaning: "碼 (1碼 = 91.4 cm)" },
+        { id: 8, term: "vigorously", meaning: "猛烈地" },
+        { id: 9, term: "scratching", meaning: "抓" },
+        { id: 10, term: "shedding", meaning: "正在脫落的" },
+        { id: 11, term: "interstate", meaning: "州際的" },
+        { id: 12, term: "roars", meaning: "發出轟隆聲" },
+        { id: 13, term: "apparently", meaning: "顯然地" },
+        { id: 14, term: "white noise", meaning: "白噪音" },
+        { id: 15, term: "wanders", meaning: "漫步" },
+        { id: 16, term: "deeper into", meaning: "更深入" },
+        { id: 17, term: "barely", meaning: "僅僅" },
+        { id: 18, term: "captivated", meaning: "深深吸引" },
+        { id: 19, term: "hollow", meaning: "洞穴" },
+        { id: 20, term: "gnarled", meaning: "粗糙的" },
+        { id: 21, term: "track", meaning: "追蹤" },
+        { id: 22, term: "hiberrated", meaning: "冬眠" },
+        { id: 23, term: "mere", meaning: "只不過的，僅僅的" },
+        { id: 24, term: "shouts over", meaning: "大聲喊叫" },
+        { id: 25, term: "scrambles", meaning: "迅速而吃力地爬行" },
+        { id: 26, term: "den", meaning: "獸穴" },
+        { id: 27, term: "adaptable", meaning: "適應力強的" },
+        { id: 28, term: "give someone credit for", meaning: "肯定某人的…能力" },
+        { id: 29, term: "indeed", meaning: "的確" },
+        { id: 30, term: "take so well to", meaning: "順利地適應" },
+        { id: 31, term: "nestled in", meaning: "坐落於" },
+        { id: 32, term: "shuffle down", meaning: "拖著腳步慢走" },
+        { id: 33, term: "residential", meaning: "住宅區" },
+        { id: 34, term: "climb onto", meaning: "爬上" },
+        { id: 35, term: "front porches", meaning: "前門廊" },
+        { id: 36, term: "embrace", meaning: "欣然接受" },
+        { id: 37, term: "encounter", meaning: "遭遇" },
+        { id: 38, term: "advent", meaning: "興起" },
+        { id: 39, term: "stems from", meaning: "源自、起因於" },
+        { id: 40, term: "tempting", meaning: "誘人的" },
+        { id: 41, term: "available", meaning: "可取得的" },
+        { id: 42, term: "sprawling", meaning: "向外擴張的" },
+        { id: 43, term: "suburb", meaning: "郊區" },
+        { id: 44, term: "swallowed up", meaning: "侵佔" },
+        { id: 45, term: "habitat", meaning: "棲息地" },
+        { id: 46, term: "phenomenon", meaning: "現象" },
+        { id: 47, term: "mammals", meaning: "哺乳動物" },
+        { id: 48, term: "survival skills", meaning: "生存技能" },
+        { id: 49, term: "harmony", meaning: "和諧" },
+        { id: 50, term: "open-minded", meaning: "思想開明的" },
+        { id: 51, term: "defend", meaning: "保護" },
+        { id: 52, term: "coexist", meaning: "共存" },
+        { id: 53, term: "reclaimed", meaning: "重新取得" },
+        { id: 54, term: "coyotes", meaning: "郊狼" },
+        { id: 55, term: "take by storm", meaning: "席捲…" },
+        { id: 56, term: "metropolis", meaning: "大都市" },
+        { id: 57, term: "synonymous with", meaning: "令人聯想到…" },
+        { id: 58, term: "ecologist", meaning: "生態學家" },
+        { id: 59, term: "consistently", meaning: "持續地" },
+        { id: 60, term: "underestimate", meaning: "低估" },
+        { id: 61, term: "boundaries", meaning: "界限" },
+        { id: 62, term: "perceive", meaning: "認為、理解" },
+        { id: 63, term: "constraints", meaning: "限制" },
+        { id: 64, term: "restricted", meaning: "受限於" },
+        { id: 65, term: "eradicate", meaning: "根除、徹底消滅" },
+        { id: 66, term: "predator", meaning: "掠食者" },
+        { id: 67, term: "strikes", meaning: "撞擊" },
+        { id: 68, term: "stoplights", meaning: "紅綠燈" },
+        { id: 69, term: "adaptability", meaning: "適應能力" },
+        { id: 70, term: "variability", meaning: "多樣性" },
+        { id: 71, term: "primary", meaning: "主要的" },
+        { id: 72, term: "captive", meaning: "被圈養的" },
+        { id: 73, term: "hypothesis", meaning: "假說" },
+        { id: 74, term: "anecdotal", meaning: "傳聞的" },
+        { id: 75, term: "theorize", meaning: "推論" },
+        { id: 76, term: "processed", meaning: "加工的" },
+        { id: 77, term: "cereal", meaning: "穀物食品" },
+        { id: 78, term: "nutrition-dense", meaning: "富含營養的" },
+        { id: 79, term: "connection", meaning: "關聯" },
+        { id: 80, term: "reliance on", meaning: "依賴" },
+        { id: 81, term: "conflict", meaning: "衝突" },
+        { id: 82, term: "cognition", meaning: "認知能力" },
+        { id: 83, term: "species", meaning: "物種" },
+        { id: 84, term: "thoroughly", meaning: "徹底地" },
+        { id: 85, term: "bushy-tailed", meaning: "蓬鬆尾巴的" },
+        { id: 86, term: "omnivores", meaning: "雜食動物" },
+        { id: 87, term: "jokingly", meaning: "開玩笑地" },
+        { id: 88, term: "dub", meaning: "稱作" },
+        { id: 89, term: "literature", meaning: "文獻" },
+        { id: 90, term: "breaking out", meaning: "從…逃脫" },
+        { id: 91, term: "confirm", meaning: "證實" },
+        { id: 92, term: "crafty", meaning: "狡猾的" },
+        { id: 93, term: "reputation", meaning: "名聲" },
+        { id: 94, term: "reversal", meaning: "反向; 倒轉" },
+        { id: 95, term: "equipped with", meaning: "配備有" },
+        { id: 96, term: "foot pedal", meaning: "腳踏板" },
+        { id: 97, term: "figured out", meaning: "弄清楚" },
+        { id: 98, term: "tweak", meaning: "稍微調整" },
+        { id: 99, term: "perspective", meaning: "觀點" },
+        { id: 100, term: "engaged with", meaning: "嘗試操作" },
+        { id: 101, term: "survival", meaning: "生存" },
+        { id: 102, term: "exploiting", meaning: "利用" },
+        { id: 103, term: "bolder", meaning: "大膽的" },
+        { id: 104, term: "rural areas", meaning: "鄉村地區" },
+        { id: 105, term: "readiness", meaning: "準備程度" },
+        { id: 106, term: "unfamiliar", meaning: "陌生的" },
+        { id: 107, term: "bait", meaning: "誘餌" },
+        { id: 108, term: "stakes", meaning: "木樁" },
+        { id: 109, term: "install", meaning: "安裝" },
+        { id: 110, term: "muggy", meaning: "悶熱潮濕的" },
+        { id: 111, term: "strapped", meaning: "固定" },
+        { id: 112, term: "feisty", meaning: "活力十足的" },
+        { id: 113, term: "chasing off", meaning: "把…趕走" },
+        { id: 114, term: "indicated", meaning: "顯示" },
+        { id: 115, term: "exploratory", meaning: "喜歡探索的" },
+        { id: 116, term: "territorial", meaning: "有領域性的" },
+        { id: 117, term: "counterpart", meaning: "相對應的人或物" },
+        { id: 118, term: "pest", meaning: "有害動物" },
+        { id: 119, term: "unworthy of", meaning: "不值得" },
+        { id: 120, term: "rapidly", meaning: "快速地" },
+        { id: 121, term: "urbanizing", meaning: "都市化" },
+        { id: 122, term: "unwise", meaning: "不明智的" },
+        { id: 123, term: "urban landscapes", meaning: "都市環境" },
+        { id: 124, term: "focuses on", meaning: "專注於" },
+        { id: 125, term: "minimize", meaning: "儘量減少" },
+        { id: 126, term: "conflicts", meaning: "衝突" },
+        { id: 127, term: "encounters", meaning: "相遇" },
+        { id: 128, term: "delightful", meaning: "令人愉快的" },
+        { id: 129, term: "coexist with", meaning: "與…共存" },
+        { id: 130, term: "celebrating", meaning: "慶祝" }
+    ];
+
+    let currentCardIndex = 0;
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+        if (tabId === 'flashcards') {
+            document.getElementById('flashcards').classList.add('active');
+            event.target.classList.add('active');
+        } else {
+            document.getElementById('flashcard-quiz').classList.add('active');
+            event.target.classList.add('active');
+            renderQuiz();
+        }
+    }
+
+    // Flashcard functions
+    function flipCard() {
+        document.querySelector('.flashcard').classList.toggle('flipped');
+    }
+
+    function updateCard() {
+        const card = vocabList[currentCardIndex];
+        document.getElementById('card-num').innerText = `Item ${card.id} of ${vocabList.length}`;
+        document.getElementById('card-term').innerText = card.term;
+        document.getElementById('card-meaning').innerText = card.meaning;
+        document.querySelector('.flashcard').classList.remove('flipped');
+    }
+
+    function nextCard() {
+        currentCardIndex = (currentCardIndex + 1) % vocabList.length;
+        updateCard();
+    }
+
+    function prevCard() {
+        currentCardIndex = (currentCardIndex - 1 + vocabList.length) % vocabList.length;
+        updateCard();
+    }
+
+    function randomCard() {
+        currentCardIndex = Math.floor(Math.random() * vocabList.length);
+        updateCard();
+    }
+
+    // Quiz functions
+    function renderQuiz() {
+        const quizContainer = document.getElementById('quiz-container');
+        if (quizContainer.children.length > 0) return; // Prevent re-rendering
+
+        vocabList.forEach((item, index) => {
+            const quizItem = document.createElement('div');
+            quizItem.className = 'quiz-item';
+            quizItem.id = `quiz-item-${item.id}`;
+
+            quizItem.innerHTML = `
+                <div class="quiz-question">${item.id}. Chinese Meaning: <strong>${item.meaning}</strong></div>
+                <div class="quiz-input-group">
+                    <input type="text" id="quiz-input-${item.id}" placeholder="Type English term here...">
+                    <button class="btn-submit" onclick="checkAnswer(${item.id}, '${item.term.replace(/'/g, "\\'")}')">Submit</button>
+                </div>
+                <div class="feedback-box" id="feedback-${item.id}"></div>
+            `;
+            quizContainer.appendChild(quizItem);
+        });
+    }
+
+    function checkAnswer(id, expectedTerm) {
+        const userInput = document.getElementById(`quiz-input-${id}`).value.trim().toLowerCase();
+        const feedbackBox = document.getElementById(`feedback-${id}`);
+        const cleanExpected = expectedTerm.toLowerCase();
+
+        if (userInput === cleanExpected) {
+            feedbackBox.className = 'feedback-box correct';
+            feedbackBox.innerHTML = `<strong>Correct!</strong> Your answer matches "${expectedTerm}".`;
+        } else {
+            feedbackBox.className = 'feedback-box incorrect';
+            feedbackBox.innerHTML = `<strong>Incorrect.</strong> Your answer: "<em>${userInput || 'Empty'}</em>". <br>Correct Answer: <strong>${expectedTerm}</strong>`;
+        }
+    }
+
+    // Initialize
+    updateCard();
+</script>
+
+</body>
+</html>
+```eof
+
+### Summary of Generated Webpage
+- **Section 1 (Flashcards):** Interactive flip-cards displaying the English vocabulary term on the front and Chinese translation on the back, covering all 130 vocabulary entries from the uploaded image scans. Includes Next, Previous, and Random controls.
+- **Section 2 (Fill-in-the-Blank Quiz):** Displays Chinese meanings for all 130 vocabulary items with text input fields. Instant answer checking provides feedback confirming correct inputs or displaying the correct English term if an incorrect answer is given.
+- **Formal Academic Style:** Uses structured typography, clean color palettes, and responsive layouts suitable for secondary or higher education study materials.
